@@ -1368,7 +1368,7 @@
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5.398 0v.006c3.028 8.556 5.37 15.175 8.348 23.596.21.062.438.062.586.017.15-.045 4.464-12.6 8.27-23.62h-4.025c-1.397 4.08-2.87 8.16-4.28 12.28C12.87 8.16 11.43 4.08 9.97 0H5.398zM0 0v24h4.14V10.08L8.27 24h.002L4.14 10.08V0H0z"/></svg>
                         Netflix
                     </a>
-                    <a href="https://www.cineby.sc/search/${encodeURIComponent(m.title)}" target="_blank" style="padding:8px 14px;border-radius:10px;background:rgba(155,89,182,0.3);color:#c39bd3;font-size:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:all 0.2s;">
+                    <a href="https://www.cineby.sc/movie/${m.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}" target="_blank" style="padding:8px 14px;border-radius:10px;background:rgba(155,89,182,0.3);color:#c39bd3;font-size:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:all 0.2s;">
                         🎬 Cineby
                     </a>
                     <a href="https://www.amazon.com/s?k=${encodeURIComponent(m.title + ' ' + m.year)}&i=instant-video" target="_blank" style="padding:8px 14px;border-radius:10px;background:rgba(0,168,225,0.2);color:#00a8e1;font-size:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:all 0.2s;">
