@@ -2,1706 +2,1744 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Night Decider 💑</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬🍕</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Date Night Decider</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0a0f">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-primary: #111118;
+            --bg-card: #1a1a24;
+            --bg-elevated: #222233;
+            --bg-hover: #2a2a3d;
+            --purple-deep: #2d1b4e;
+            --purple: #7c3aed;
+            --purple-light: #a78bfa;
+            --purple-glow: rgba(124, 58, 237, 0.3);
+            --rose: #d4a574;
+            --rose-light: #e8c9a0;
+            --rose-glow: rgba(212, 165, 116, 0.3);
+            --pink: #ec4899;
+            --pink-light: #f9a8d4;
+            --text-primary: #f5f5f7;
+            --text-secondary: rgba(245, 245, 247, 0.65);
+            --text-tertiary: rgba(245, 245, 247, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --netflix-red: #e50914;
+            --green: #34d399;
+            --green-bg: rgba(52, 211, 153, 0.12);
+            --yellow: #fbbf24;
+            --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
             min-height: 100vh;
-            color: #fff;
-            padding: 20px;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 1200px;
+        /* ===== AMBIENT BACKGROUND ===== */
+        .ambient {
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, rgba(212, 165, 116, 0.06) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== APP SHELL ===== */
+        .app {
+            position: relative;
+            z-index: 1;
+            max-width: 480px;
             margin: 0 auto;
+            padding: 0 16px;
+            padding-top: calc(var(--safe-top) + 16px);
+            padding-bottom: calc(var(--safe-bottom) + 100px);
         }
 
-        header {
+        /* ===== HEADER ===== */
+        .header {
             text-align: center;
-            margin-bottom: 20px;
+            padding: 24px 0 8px;
         }
-
-        header h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(90deg, #e94560, #ff6b6b, #ffa502, #9c27b0);
+        .header-names {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 4px;
+        }
+        .header-title {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--purple-light), var(--rose-light), var(--pink-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
         }
 
-        header p {
-            color: #a0a0a0;
-            font-size: 1.1rem;
-        }
-
-        /* Tab Navigation */
-        .tab-nav {
+        /* ===== BOTTOM TAB BAR ===== */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(17, 17, 24, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 8px 0;
+            padding-bottom: calc(var(--safe-bottom) + 8px);
         }
-
-        .tab-btn {
-            padding: 15px 30px;
-            border: 2px solid transparent;
-            background: rgba(255, 255, 255, 0.1);
-            color: #a0a0a0;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
-
-        .tab-btn.active[data-tab="movie"] {
-            background: linear-gradient(135deg, #e94560, #ff6b6b);
-            color: #fff;
-            border-color: #e94560;
-        }
-
-        .tab-btn.active[data-tab="dinner"] {
-            background: linear-gradient(135deg, #ffa502, #ff7f50);
-            color: #fff;
-            border-color: #ffa502;
-        }
-
-        .tab-btn.active[data-tab="datenight"] {
-            background: linear-gradient(135deg, #9c27b0, #e040fb);
-            color: #fff;
-            border-color: #9c27b0;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Filter Section */
-        .filter-section {
+        .tab-item {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .filter-btn {
-            padding: 12px 24px;
-            border: 2px solid #e94560;
-            background: transparent;
-            color: #e94560;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: #e94560;
-            color: #fff;
-        }
-
-        .dinner-filter .filter-btn {
-            border-color: #ffa502;
-            color: #ffa502;
-        }
-
-        .dinner-filter .filter-btn:hover, .dinner-filter .filter-btn.active {
-            background: #ffa502;
-            color: #fff;
-        }
-
-        .datenight-filter .filter-btn {
-            border-color: #9c27b0;
-            color: #e040fb;
-        }
-
-        .datenight-filter .filter-btn:hover, .datenight-filter .filter-btn.active {
-            background: #9c27b0;
-            color: #fff;
-        }
-
-        /* Spin Button */
-        .spin-container {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .spin-btn {
-            padding: 20px 60px;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 4px 8px;
             border: none;
-            border-radius: 50px;
-            color: white;
+            background: none;
+            color: var(--text-tertiary);
+            font-size: 10px;
+            font-weight: 500;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+            transition: color 0.2s var(--ease-apple);
+            -webkit-tap-highlight-color: transparent;
         }
+        .tab-item.active { color: var(--purple-light); }
+        .tab-item svg { width: 24px; height: 24px; }
+        .tab-item span { margin-top: 1px; }
 
-        .spin-btn.dinner-spin {
-            background: linear-gradient(135deg, #ffa502, #ff7f50);
-            box-shadow: 0 10px 30px rgba(255, 165, 2, 0.4);
-        }
-
-        .spin-btn.datenight-spin {
-            background: linear-gradient(135deg, #9c27b0, #e040fb);
-            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.4);
-        }
-
-        .spin-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.6);
-        }
-
-        .spin-btn.dinner-spin:hover {
-            box-shadow: 0 15px 40px rgba(255, 165, 2, 0.6);
-        }
-
-        .spin-btn.datenight-spin:hover {
-            box-shadow: 0 15px 40px rgba(156, 39, 176, 0.6);
-        }
-
-        .spin-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .spin-btn.spinning {
-            animation: pulse 0.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* Cards */
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        /* ===== TAB CONTENT ===== */
+        .tab-content { display: none; animation: fadeUp 0.35s var(--ease-snappy); }
+        .tab-content.active { display: block; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .card h3 {
-            font-size: 1.4rem;
-            color: #e94560;
-            margin-bottom: 8px;
+        /* ===== HERO CARD (This Week) ===== */
+        .hero-card {
+            background: linear-gradient(145deg, var(--purple-deep), var(--bg-card));
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 24px;
+            padding: 28px 24px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
         }
-
-        .dinner-card h3 {
-            color: #ffa502;
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.1), transparent 70%);
+            pointer-events: none;
         }
-
-        .datenight-card h3 {
-            color: #e040fb;
+        .hero-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 12px;
         }
-
-        .card-meta {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .tag {
-            background: rgba(233, 69, 96, 0.2);
-            color: #ff6b6b;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-        }
-
-        .dinner-card .tag {
-            background: rgba(255, 165, 2, 0.2);
-            color: #ffa502;
-        }
-
-        .datenight-card .tag {
-            background: rgba(156, 39, 176, 0.2);
-            color: #e040fb;
-        }
-
-        .card p {
-            color: #c0c0c0;
-            line-height: 1.6;
+        .hero-friday {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
             margin-bottom: 20px;
+            letter-spacing: -0.01em;
         }
-
-        .card-links {
+        .hero-section {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        .hero-section:last-of-type { margin-bottom: 0; }
+        .hero-section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 6px;
+        }
+        .hero-section-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .hero-section-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .hero-actions {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
+            margin-top: 20px;
         }
-
-        .card-link {
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .trailer-link {
-            background: #ff0000;
-            color: white;
-        }
-
-        .trailer-link:hover {
-            background: #cc0000;
-        }
-
-        .stream-link {
-            background: #e50914;
-            color: white;
-        }
-
-        .stream-link:hover {
-            background: #b20710;
-        }
-
-        .popup-tip {
-            background: rgba(229, 9, 20, 0.15);
-            border: 1px solid rgba(229, 9, 20, 0.5);
-            border-radius: 10px;
-            padding: 12px 15px;
-            margin-bottom: 20px;
-            font-size: 0.85rem;
-            color: #ffaaaa;
-            text-align: center;
-        }
-
-        .popup-tip a {
-            color: #ff6b6b;
-            text-decoration: underline;
-        }
-
-        /* Search Box */
-        .search-section {
-            margin-bottom: 25px;
-        }
-
-        .search-container {
-            display: flex;
-            gap: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .search-input {
+        .btn-did-this {
             flex: 1;
-            padding: 15px 20px;
-            border: 2px solid rgba(233, 69, 96, 0.3);
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--purple), #9333ea);
             color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s ease;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-apple);
         }
-
-        .search-input:focus {
-            border-color: #e94560;
+        .btn-did-this:active { transform: scale(0.97); opacity: 0.9; }
+        .btn-shuffle {
+            padding: 14px 18px;
+            border: 1px solid var(--border-hover);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-apple);
         }
+        .btn-shuffle:active { transform: scale(0.97); }
 
-        .search-input::placeholder {
-            color: #888;
-        }
-
-        .search-results {
-            margin-top: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .search-result-item {
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        /* ===== STREAK BANNER ===== */
+        .streak-banner {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: var(--green-bg);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            border-radius: 14px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--green);
+        }
+        .streak-banner.empty {
+            background: rgba(251, 191, 36, 0.08);
+            border-color: rgba(251, 191, 36, 0.2);
+            color: var(--yellow);
         }
 
-        .search-result-item:last-child {
-            border-bottom: none;
+        /* ===== SECTION HEADERS ===== */
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            margin: 28px 0 16px;
+        }
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-top: -12px;
+            margin-bottom: 16px;
         }
 
-        .search-result-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .search-result-info {
-            flex: 1;
-        }
-
-        .search-result-info h4 {
-            color: #e94560;
-            margin-bottom: 5px;
-        }
-
-        .search-result-info p {
-            color: #888;
-            font-size: 0.85rem;
-        }
-
-        .search-result-actions {
+        /* ===== FILTER PILLS ===== */
+        .filters {
             display: flex;
             gap: 8px;
+            overflow-x: auto;
+            padding: 4px 0;
+            margin-bottom: 16px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-
-        .quick-add-btn {
+        .filters::-webkit-scrollbar { display: none; }
+        .filter-pill {
+            flex-shrink: 0;
             padding: 8px 16px;
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            border: none;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: transform 0.2s ease;
-        }
-
-        .quick-add-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .on-list-badge {
-            padding: 8px 16px;
-            background: rgba(76, 175, 80, 0.2);
-            border-radius: 20px;
-            color: #81c784;
-            font-size: 0.85rem;
-        }
-
-        .watched-badge {
-            padding: 8px 16px;
-            background: rgba(156, 39, 176, 0.2);
-            border-radius: 20px;
-            color: #ce93d8;
-            font-size: 0.85rem;
-        }
-
-        .search-tmdb-note {
-            text-align: center;
-            color: #666;
-            font-size: 0.8rem;
-            margin-top: 10px;
-        }
-
-        .recipe-link {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .recipe-link:hover {
-            background: #45a049;
-        }
-
-        .order-link {
-            background: #9c27b0;
-            color: white;
-        }
-
-        .order-link:hover {
-            background: #7b1fa2;
-        }
-
-        .groupon-link {
-            background: linear-gradient(135deg, #53a318, #7cc33f);
-            color: white;
-        }
-
-        .groupon-link:hover {
-            background: linear-gradient(135deg, #448214, #6ab32f);
-        }
-
-        .pick-btn {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .pick-btn:hover {
-            background: linear-gradient(135deg, #45a049, #3d8b40);
-        }
-
-        /* Section Headers */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(233, 69, 96, 0.3);
-        }
-
-        .dinner-section .section-header {
-            border-bottom-color: rgba(255, 165, 2, 0.3);
-        }
-
-        .datenight-section .section-header {
-            border-bottom-color: rgba(156, 39, 176, 0.3);
-        }
-
-        .section-header h2 {
-            color: #e94560;
-        }
-
-        .dinner-section .section-header h2 {
-            color: #ffa502;
-        }
-
-        .datenight-section .section-header h2 {
-            color: #e040fb;
-        }
-
-        .clear-btn {
-            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 100px;
             background: transparent;
-            border: 1px solid #e94560;
-            color: #e94560;
-            border-radius: 15px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
-            font-size: 0.85rem;
+            transition: all 0.2s var(--ease-apple);
+            white-space: nowrap;
         }
-
-        .dinner-section .clear-btn {
-            border-color: #ffa502;
-            color: #ffa502;
-        }
-
-        .datenight-section .clear-btn {
-            border-color: #9c27b0;
-            color: #e040fb;
-        }
-
-        .clear-btn:hover {
-            background: #e94560;
+        .filter-pill:active { transform: scale(0.96); }
+        .filter-pill.active {
+            background: var(--purple);
+            border-color: var(--purple);
             color: white;
         }
 
-        .dinner-section .clear-btn:hover {
-            background: #ffa502;
-        }
-
-        .datenight-section .clear-btn:hover {
-            background: #9c27b0;
-        }
-
-        .history-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
-
-        .history-item {
-            background: rgba(76, 175, 80, 0.2);
-            color: #81c784;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .remove-history {
-            background: none;
-            border: none;
-            color: #81c784;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .remove-history:hover {
-            color: #ff6b6b;
-        }
-
-        /* Add Form */
-        .add-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 40px;
-        }
-
-        .add-section h2 {
-            color: #e94560;
-            margin-bottom: 20px;
-        }
-
-        .dinner-section .add-section h2 {
-            color: #ffa502;
-        }
-
-        .datenight-section .add-section h2 {
-            color: #e040fb;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
+        /* ===== MOVIE CARDS ===== */
+        .movie-grid {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 12px;
         }
-
-        .form-group label {
-            color: #a0a0a0;
-            font-size: 0.9rem;
+        .movie-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
+            transition: all 0.25s var(--ease-apple);
         }
-
-        .form-group input, .form-group textarea, .form-group select {
-            padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #e94560;
-        }
-
-        .dinner-section .form-group input:focus, .dinner-section .form-group textarea:focus {
-            border-color: #ffa502;
-        }
-
-        .datenight-section .form-group input:focus, .datenight-section .form-group textarea:focus {
-            border-color: #9c27b0;
-        }
-
-        .add-btn {
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #e94560, #ff6b6b);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .dinner-section .add-btn {
-            background: linear-gradient(135deg, #ffa502, #ff7f50);
-        }
-
-        .datenight-section .add-btn {
-            background: linear-gradient(135deg, #9c27b0, #e040fb);
-        }
-
-        .add-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* Stats */
-        .stats {
-            text-align: center;
-            color: #a0a0a0;
-            margin-bottom: 20px;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #a0a0a0;
-        }
-
-        .empty-state h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        /* Toggle */
-        .toggle-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #a0a0a0;
-            padding: 8px 16px;
-            border-radius: 15px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        .toggle-btn:hover {
-            border-color: #e94560;
-            color: #e94560;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            .spin-btn {
-                padding: 15px 40px;
-                font-size: 1.2rem;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tab-btn {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Effort badges */
-        .effort-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
-
-        .effort-easy {
-            background: rgba(76, 175, 80, 0.3);
-            color: #81c784;
-        }
-
-        .effort-medium {
-            background: rgba(255, 193, 7, 0.3);
-            color: #ffd54f;
-        }
-
-        .effort-involved {
-            background: rgba(233, 69, 96, 0.3);
-            color: #ff6b6b;
-        }
-
-        .cook-vs-order {
+        .movie-card:active { transform: scale(0.98); }
+        .movie-card-header {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 20px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .movie-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+        .movie-year {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+        .movie-rating {
+            font-size: 13px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+        .movie-tags {
+            display: flex;
+            gap: 6px;
             flex-wrap: wrap;
-        }
-
-        .cook-vs-order button {
-            padding: 10px 25px;
-            border: 2px solid #ffa502;
-            background: transparent;
-            color: #ffa502;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cook-vs-order button.active,
-        .cook-vs-order button:hover {
-            background: #ffa502;
-            color: #fff;
-        }
-
-        /* Date Night Specific Styles */
-        .date-plan-card {
-            background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(224, 64, 251, 0.05));
-            border: 2px solid rgba(156, 39, 176, 0.3);
-        }
-
-        .date-plan-card h3 {
-            color: #e040fb;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .date-plan-section {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-        }
-
-        .date-plan-section h4 {
-            color: #fff;
-            font-size: 1.1rem;
             margin-bottom: 10px;
+        }
+        .movie-tag {
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 500;
+            background: rgba(124, 58, 237, 0.12);
+            color: var(--purple-light);
+        }
+        .movie-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+        .movie-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-netflix {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 10px;
+            background: var(--netflix-red);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s var(--ease-apple);
+        }
+        .btn-netflix:active { transform: scale(0.96); opacity: 0.9; }
+        .btn-watched {
+            padding: 10px 16px;
+            border: 1px solid var(--border-hover);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-apple);
+        }
+        .btn-watched:active { transform: scale(0.96); }
+        .btn-watched.done {
+            background: var(--green-bg);
+            border-color: rgba(52, 211, 153, 0.3);
+            color: var(--green);
+        }
+
+        /* ===== ACTIVITY & DINNER CARDS ===== */
+        .venue-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 12px;
+            transition: all 0.25s var(--ease-apple);
+        }
+        .venue-card:active { transform: scale(0.98); }
+        .venue-name {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .venue-meta {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
         }
-
-        .date-plan-section p {
+        .venue-price {
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .price-free { background: rgba(52, 211, 153, 0.12); color: var(--green); }
+        .price-budget { background: rgba(96, 165, 250, 0.12); color: #60a5fa; }
+        .price-moderate { background: rgba(251, 191, 36, 0.12); color: var(--yellow); }
+        .price-splurge { background: rgba(236, 72, 153, 0.12); color: var(--pink); }
+        .venue-address {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        .venue-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+        .venue-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
             margin-bottom: 10px;
         }
-
-        .price-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            margin-left: 10px;
+        .venue-tag {
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 500;
+            background: rgba(212, 165, 116, 0.12);
+            color: var(--rose);
+        }
+        .venue-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 16px;
+            border: 1px solid var(--border-hover);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s var(--ease-apple);
+        }
+        .btn-link:active { transform: scale(0.96); }
+        .btn-link.primary {
+            background: var(--purple);
+            border-color: var(--purple);
+            color: white;
+        }
+        .btn-link.green {
+            background: rgba(83, 163, 24, 0.15);
+            border-color: rgba(83, 163, 24, 0.3);
+            color: #7cc33f;
+        }
+        .btn-link.recipe {
+            background: rgba(52, 211, 153, 0.12);
+            border-color: rgba(52, 211, 153, 0.2);
+            color: var(--green);
         }
 
-        .price-free {
-            background: rgba(76, 175, 80, 0.3);
-            color: #81c784;
+        /* ===== RANDOM PICK BUTTON ===== */
+        .random-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--purple-deep), var(--bg-card));
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            color: var(--purple-light);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.2s var(--ease-apple);
+        }
+        .random-btn:active { transform: scale(0.97); }
+        .random-btn.spinning { animation: shimmer 0.6s ease-in-out; }
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; border-color: var(--purple); }
         }
 
-        .price-budget {
-            background: rgba(33, 150, 243, 0.3);
-            color: #64b5f6;
+        /* Random pick highlight */
+        .random-pick {
+            border-color: var(--purple) !important;
+            box-shadow: 0 0 20px var(--purple-glow);
         }
 
-        .price-moderate {
-            background: rgba(255, 193, 7, 0.3);
-            color: #ffd54f;
+        /* ===== EFFORT BADGES ===== */
+        .effort-badge {
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 500;
         }
+        .effort-easy { background: rgba(52, 211, 153, 0.12); color: var(--green); }
+        .effort-medium { background: rgba(251, 191, 36, 0.12); color: var(--yellow); }
+        .effort-involved { background: rgba(236, 72, 153, 0.12); color: var(--pink); }
 
-        .price-splurge {
-            background: rgba(233, 69, 96, 0.3);
-            color: #ff6b6b;
+        /* ===== TRACKER TAB ===== */
+        .tracker-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
         }
-
-        .groupon-banner {
-            background: linear-gradient(135deg, #53a318, #7cc33f);
-            padding: 15px 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
             text-align: center;
         }
-
-        .groupon-banner a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+        .stat-value.purple { color: var(--purple-light); }
+        .stat-value.green { color: var(--green); }
+        .stat-value.rose { color: var(--rose); }
+        .stat-value.pink { color: var(--pink); }
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
+            font-weight: 500;
         }
 
-        .groupon-banner a:hover {
-            text-decoration: underline;
+        /* Budget bar */
+        .budget-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .budget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+        .budget-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .budget-amount {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--green);
+        }
+        .budget-amount.over { color: var(--pink); }
+        .budget-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 100px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .budget-fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, var(--purple), var(--green));
+            transition: width 0.5s var(--ease-snappy);
+        }
+        .budget-fill.over {
+            background: linear-gradient(90deg, var(--pink), #ef4444);
+        }
+        .budget-note {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        /* Log form */
+        .log-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .log-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .form-field {
+            margin-bottom: 14px;
+        }
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            display: block;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s var(--ease-apple);
+            -webkit-appearance: none;
+        }
+        .form-input:focus, .form-select:focus {
+            border-color: var(--purple);
+        }
+        .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+        .form-select option {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+        .btn-log {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--purple), #9333ea);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-apple);
+        }
+        .btn-log:active { transform: scale(0.97); opacity: 0.9; }
+
+        /* Date history */
+        .history-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        .history-info p {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        .history-cost {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--rose);
+        }
+        .history-delete {
+            padding: 6px;
+            border: none;
+            background: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.15s;
+        }
+        .history-delete:hover { color: var(--pink); }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-tertiary);
+        }
+        .empty-state-icon { font-size: 40px; margin-bottom: 12px; }
+        .empty-state-text { font-size: 15px; line-height: 1.5; }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            padding: 12px 24px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-hover);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 200;
+            opacity: 0;
+            transition: all 0.3s var(--ease-spring);
+            pointer-events: none;
+            backdrop-filter: blur(12px);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 150;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal {
+            background: var(--bg-primary);
+            border-radius: 24px 24px 0 0;
+            width: 100%;
+            max-width: 480px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 24px;
+            padding-bottom: calc(var(--safe-bottom) + 24px);
+            animation: slideUp 0.35s var(--ease-snappy);
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .modal-handle {
+            width: 36px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 100px;
+            margin: 0 auto 20px;
+        }
+
+        /* ===== SEARCH ===== */
+        .search-bar {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 12px 14px 12px 40px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s var(--ease-apple);
+        }
+        .search-bar input:focus { border-color: var(--purple); }
+        .search-bar input::placeholder { color: var(--text-tertiary); }
+        .search-bar svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: var(--text-tertiary);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 0; height: 0; }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        /* Clear history button */
+        .btn-clear {
+            padding: 8px 14px;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--pink);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-apple);
+        }
+        .btn-clear:active { transform: scale(0.96); }
+
+        /* ===== RESPONSIVE DESKTOP ===== */
+        @media (min-width: 481px) {
+            .app { padding: 0 24px; padding-bottom: 120px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>💑 Date Night Decider</h1>
-            <p>Richard & Wife's Ultimate Night Out (or In) Planner</p>
-        </header>
+    <div class="ambient"></div>
 
-        <!-- Tab Navigation -->
-        <div class="tab-nav">
-            <button class="tab-btn active" data-tab="movie">🎬 Movie Night</button>
-            <button class="tab-btn" data-tab="dinner">🍽️ What's for Dinner?</button>
-            <button class="tab-btn" data-tab="datenight">💑 Date Night Out</button>
+    <div class="app">
+        <div class="header">
+            <div class="header-names">Richard & Tori</div>
+            <div class="header-title">Date Night Decider</div>
         </div>
 
-        <!-- ==================== MOVIE TAB ==================== -->
-        <div class="tab-content active" id="movieTab">
-            <div class="filter-section">
-                <button class="filter-btn active" data-filter="all">All Movies</button>
-                <button class="filter-btn" data-filter="thriller">Thriller</button>
-                <button class="filter-btn" data-filter="action">Action</button>
-                <button class="filter-btn" data-filter="horror">Horror</button>
-                <button class="filter-btn" data-filter="romance">Romance</button>
-                <button class="filter-btn" data-filter="classic">70s/80s Classics</button>
-                <button class="filter-btn" data-filter="documentary">Documentary</button>
-                <button class="filter-btn" data-filter="scifi">Sci-Fi/Aliens</button>
-            </div>
-
-            <div class="stats">
-                <span id="movieCount">0</span> movies available | <span id="watchedCount">0</span> watched
-            </div>
-
-            <div class="popup-tip">
-                💡 <strong>Tip:</strong> Cineby has popups! Install <a href="https://ublockorigin.com/" target="_blank">uBlock Origin</a> for the best experience. On mobile, use Brave browser.
-            </div>
-
-            <!-- Search Section -->
-            <div class="search-section">
-                <div class="search-container">
-                    <input type="text" id="movieSearchInput" class="search-input" placeholder="🔍 Search movies (your list + discover new ones)...">
-                </div>
-                <div id="movieSearchResults" class="search-results" style="display: none;"></div>
-                <p id="tmdbNote" class="search-tmdb-note" style="display: none;">Results from TMDB • Click + to add to your list</p>
-            </div>
-
-            <div class="spin-container">
-                <button class="spin-btn" id="spinMovieBtn">🎰 Spin for 3 Movies!</button>
-            </div>
-
-            <div class="results-grid" id="movieResults"></div>
-
-            <div class="section-header">
-                <h2>✅ Watched Movies</h2>
-                <div>
-                    <button class="clear-btn" id="clearMovieHistory">Clear All</button>
-                    <button class="toggle-btn" id="toggleMovieHistory">Hide</button>
-                </div>
-            </div>
-            <div class="history-list" id="watchedList"></div>
-
-            <div class="add-section">
-                <h2>➕ Add a Movie</h2>
-                <form id="addMovieForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Movie Title *</label>
-                            <input type="text" id="movieTitle" required placeholder="e.g., The Matrix">
-                        </div>
-                        <div class="form-group">
-                            <label>Year</label>
-                            <input type="number" id="movieYear" placeholder="e.g., 1999">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Genres (comma separated) *</label>
-                            <input type="text" id="movieGenres" required placeholder="e.g., Action, Sci-Fi, Thriller">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Synopsis *</label>
-                            <textarea id="movieSynopsis" required placeholder="Brief description of the movie..."></textarea>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>YouTube Trailer URL</label>
-                            <input type="url" id="movieTrailer" placeholder="https://youtube.com/watch?v=...">
-                        </div>
-                    </div>
-                    <button type="submit" class="add-btn">Add Movie</button>
-                </form>
-            </div>
+        <!-- ===== THIS WEEK TAB ===== -->
+        <div class="tab-content active" id="tab-thisweek">
+            <div id="streakBanner" class="streak-banner"></div>
+            <div id="heroCard" class="hero-card"></div>
+            <div class="section-title">Quick Ideas</div>
+            <div id="quickIdeas"></div>
         </div>
 
-        <!-- ==================== DINNER TAB ==================== -->
-        <div class="tab-content dinner-section" id="dinnerTab">
-            <div class="cook-vs-order">
-                <button class="active" data-mode="all">🍴 All Options</button>
-                <button data-mode="cook">👨‍🍳 Cook at Home</button>
-                <button data-mode="order">📱 Order In / Go Out</button>
+        <!-- ===== MOVIES TAB ===== -->
+        <div class="tab-content" id="tab-movies">
+            <div class="section-title">Movies</div>
+            <div class="search-bar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="movieSearch" placeholder="Search movies...">
             </div>
-
-            <div class="filter-section dinner-filter">
-                <button class="filter-btn active" data-filter="all">All Food</button>
-                <button class="filter-btn" data-filter="quick">Quick & Easy</button>
-                <button class="filter-btn" data-filter="comfort">Comfort Food</button>
-                <button class="filter-btn" data-filter="healthy">Healthy</button>
-                <button class="filter-btn" data-filter="mexican">Mexican</button>
-                <button class="filter-btn" data-filter="asian">Asian</button>
-                <button class="filter-btn" data-filter="italian">Italian</button>
-                <button class="filter-btn" data-filter="american">American</button>
-                <button class="filter-btn" data-filter="soul">Soul Food</button>
-            </div>
-
-            <div class="stats">
-                <span id="dinnerCount">0</span> dinner options available | <span id="eatenCount">0</span> recently had
-            </div>
-
-            <div class="spin-container">
-                <button class="spin-btn dinner-spin" id="spinDinnerBtn">🎰 Spin for 3 Dinner Ideas!</button>
-            </div>
-
-            <div class="results-grid" id="dinnerResults"></div>
-
-            <div class="section-header">
-                <h2>🍽️ Recently Had</h2>
-                <div>
-                    <button class="clear-btn" id="clearDinnerHistory">Clear All</button>
-                    <button class="toggle-btn" id="toggleDinnerHistory">Hide</button>
-                </div>
-            </div>
-            <div class="history-list" id="eatenList"></div>
-
-            <div class="add-section">
-                <h2>➕ Add a Dinner Option</h2>
-                <form id="addDinnerForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Dish Name *</label>
-                            <input type="text" id="dinnerName" required placeholder="e.g., Chicken Alfredo">
-                        </div>
-                        <div class="form-group">
-                            <label>Type</label>
-                            <select id="dinnerType">
-                                <option value="cook">Cook at Home</option>
-                                <option value="order">Order In / Go Out</option>
-                                <option value="both">Either</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Cuisine / Tags (comma separated) *</label>
-                            <input type="text" id="dinnerTags" required placeholder="e.g., Italian, Comfort Food, Quick">
-                        </div>
-                        <div class="form-group">
-                            <label>Effort Level</label>
-                            <select id="dinnerEffort">
-                                <option value="easy">Easy (under 30 min)</option>
-                                <option value="medium">Medium (30-60 min)</option>
-                                <option value="involved">Involved (60+ min)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Description</label>
-                            <textarea id="dinnerDesc" placeholder="What makes this dish special..."></textarea>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Recipe URL (optional)</label>
-                            <input type="url" id="dinnerRecipe" placeholder="https://...">
-                        </div>
-                    </div>
-                    <button type="submit" class="add-btn">Add Dinner Option</button>
-                </form>
-            </div>
+            <div class="filters" id="movieFilters"></div>
+            <div id="movieList" class="movie-grid"></div>
         </div>
 
-        <!-- ==================== DATE NIGHT TAB ==================== -->
-        <div class="tab-content datenight-section" id="datenightTab">
-            <div class="groupon-banner">
-                <a href="https://www.groupon.com/local/things-to-do" target="_blank">🎫 Browse All Groupon Deals for Activities</a>
-                &nbsp;|&nbsp;
-                <a href="https://www.groupon.com/local/food-and-drink" target="_blank">🍴 Browse All Food & Drink Deals</a>
+        <!-- ===== ACTIVITIES TAB ===== -->
+        <div class="tab-content" id="tab-activities">
+            <div class="section-title">Activities</div>
+            <div class="section-subtitle">Atlanta & Decatur date spots</div>
+            <div class="search-bar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="activitySearch" placeholder="Search activities...">
             </div>
+            <div class="filters" id="activityFilters"></div>
+            <button class="random-btn" id="randomActivityBtn">Surprise Us With an Activity</button>
+            <div id="activityList"></div>
+        </div>
 
-            <div class="filter-section datenight-filter">
-                <button class="filter-btn active" data-filter="all">All Dates</button>
-                <button class="filter-btn" data-filter="active">Active/Adventure</button>
-                <button class="filter-btn" data-filter="chill">Chill & Relaxed</button>
-                <button class="filter-btn" data-filter="romantic">Romantic</button>
-                <button class="filter-btn" data-filter="fun">Fun & Games</button>
-                <button class="filter-btn" data-filter="cultural">Cultural</button>
-                <button class="filter-btn" data-filter="free">Free/Cheap</button>
+        <!-- ===== DINNER TAB ===== -->
+        <div class="tab-content" id="tab-dinner">
+            <div class="section-title">Dinner</div>
+            <div class="search-bar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="dinnerSearch" placeholder="Search dinner ideas...">
             </div>
+            <div class="filters" id="dinnerFilters"></div>
+            <button class="random-btn" id="randomDinnerBtn">Pick a Random Dinner</button>
+            <div id="dinnerList"></div>
+            <div class="divider"></div>
+            <div class="section-title">Atlanta Restaurants</div>
+            <div class="section-subtitle">Real spots we love</div>
+            <div id="restaurantList"></div>
+        </div>
 
-            <div class="stats">
-                <span id="dateCount">0</span> date ideas available | <span id="doneCount">0</span> dates completed
-            </div>
-
-            <div class="spin-container">
-                <button class="spin-btn datenight-spin" id="spinDateBtn">🎰 Plan Our Date Night!</button>
-            </div>
-
-            <div class="results-grid" id="dateResults"></div>
-
-            <div class="section-header">
-                <h2>💕 Recent Dates</h2>
-                <div>
-                    <button class="clear-btn" id="clearDateHistory">Clear All</button>
-                    <button class="toggle-btn" id="toggleDateHistory">Hide</button>
+        <!-- ===== TRACKER TAB ===== -->
+        <div class="tab-content" id="tab-tracker">
+            <div class="section-title">Date Tracker</div>
+            <div class="tracker-stats">
+                <div class="stat-card">
+                    <div class="stat-value purple" id="totalDates">0</div>
+                    <div class="stat-label">Total Dates</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value green" id="streakCount">0</div>
+                    <div class="stat-label">Friday Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value rose" id="lastDateDisplay">--</div>
+                    <div class="stat-label">Last Date</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value pink" id="monthDates">0</div>
+                    <div class="stat-label">This Month</div>
                 </div>
             </div>
-            <div class="history-list" id="dateList"></div>
 
-            <div class="add-section">
-                <h2>➕ Add a Date Idea</h2>
-                <form id="addDateForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Activity Name *</label>
-                            <input type="text" id="dateName" required placeholder="e.g., Escape Room">
-                        </div>
-                        <div class="form-group">
-                            <label>Price Range</label>
-                            <select id="datePrice">
-                                <option value="free">Free</option>
-                                <option value="budget">Budget ($1-30)</option>
-                                <option value="moderate">Moderate ($30-75)</option>
-                                <option value="splurge">Splurge ($75+)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Tags (comma separated) *</label>
-                            <input type="text" id="dateTags" required placeholder="e.g., Active, Fun, Indoor">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Description</label>
-                            <textarea id="dateDesc" placeholder="What makes this date idea great..."></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" class="add-btn">Add Date Idea</button>
-                </form>
+            <div class="budget-card">
+                <div class="budget-header">
+                    <div class="budget-title">Monthly Budget</div>
+                    <div class="budget-amount" id="budgetRemaining">$200 left</div>
+                </div>
+                <div class="budget-bar">
+                    <div class="budget-fill" id="budgetFill" style="width: 0%"></div>
+                </div>
+                <div class="budget-note" id="budgetNote">$0 of $200 spent this month</div>
             </div>
+
+            <div class="log-form">
+                <div class="log-title">Log a Date</div>
+                <div class="form-field">
+                    <label class="form-label">What did you do?</label>
+                    <input type="text" class="form-input" id="logActivity" placeholder="e.g., Escape Room + Dinner">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Where?</label>
+                    <input type="text" class="form-input" id="logLocation" placeholder="e.g., Ponce City Market">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Cost ($)</label>
+                    <input type="number" class="form-input" id="logCost" placeholder="0" min="0">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-input" id="logDate">
+                </div>
+                <button class="btn-log" id="logBtn">Log This Date</button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div class="section-title" style="margin: 0;">Date History</div>
+                <button class="btn-clear" id="clearHistory">Clear All</button>
+            </div>
+            <div id="historyList"></div>
         </div>
     </div>
 
+    <!-- Tab Bar -->
+    <nav class="tab-bar">
+        <button class="tab-item active" data-tab="thisweek">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>This Week</span>
+        </button>
+        <button class="tab-item" data-tab="movies">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="2.18"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 7h5M17 17h5"/></svg>
+            <span>Movies</span>
+        </button>
+        <button class="tab-item" data-tab="activities">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <span>Activities</span>
+        </button>
+        <button class="tab-item" data-tab="dinner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+            <span>Dinner</span>
+        </button>
+        <button class="tab-item" data-tab="tracker">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span>Tracker</span>
+        </button>
+    </nav>
+
+    <div class="toast" id="toast"></div>
+
     <script>
-        // ==================== MOVIE DATA ====================
-        let movies = [
-            { id: 1, title: "Escape From New York", year: 1981, genres: ["Action", "Thriller", "Classic"], synopsis: "In a dystopian future, the entire island of Manhattan has become a maximum-security prison. When the President's plane crashes there, a legendary war hero turned criminal is offered his freedom if he can rescue the Commander-in-Chief within 24 hours.", trailer: "https://www.youtube.com/watch?v=R4LFY4CYhJk", justwatch: "https://www.justwatch.com/us/movie/escape-from-new-york" },
-            { id: 2, title: "Apocalypse Now", year: 1979, genres: ["Action", "Classic"], synopsis: "During the Vietnam War, Captain Willard is sent on a dangerous mission up the Nung River into Cambodia to assassinate a renegade Green Beret Colonel who has set himself up as a god among a local tribe.", trailer: "https://www.youtube.com/watch?v=FTjG-Aux_yQ", justwatch: "https://www.justwatch.com/us/movie/apocalypse-now" },
-            { id: 3, title: "True Lies", year: 1994, genres: ["Action", "Thriller"], synopsis: "Harry Tasker leads a double life as a spy for a top-secret government agency while his wife believes he's a boring computer salesman. When she gets tangled up with a used-car salesman posing as a spy, Harry's two worlds hilariously and dangerously collide.", trailer: "https://www.youtube.com/watch?v=3B6wnmN8Pbk", justwatch: "https://www.justwatch.com/us/movie/true-lies" },
-            { id: 4, title: "The Bodyguard", year: 1992, genres: ["Thriller", "Romance"], synopsis: "A former Secret Service agent turned bodyguard is hired to protect a famous pop singer from a stalker. Despite their clashing personalities, an unexpected romance develops as the threats against her life intensify.", trailer: "https://www.youtube.com/watch?v=_8FqOW-3Xos", justwatch: "https://www.justwatch.com/us/movie/the-bodyguard" },
-            { id: 5, title: "Good Will Hunting", year: 1997, genres: ["Drama", "Thriller"], synopsis: "A young janitor at MIT has a gift for mathematics but needs help from a psychologist to find direction in his life. A powerful story about genius, trauma, friendship, and the courage to embrace one's potential.", trailer: "https://www.youtube.com/watch?v=PaZVjZEFkRs", justwatch: "https://www.justwatch.com/us/movie/good-will-hunting" },
-            { id: 6, title: "The Fugitive", year: 1993, genres: ["Action", "Thriller"], synopsis: "A Chicago doctor, wrongfully convicted of murdering his wife, escapes from custody and becomes a fugitive. While being relentlessly pursued by a determined U.S. Marshal, he races to find the real killer and prove his innocence.", trailer: "https://www.youtube.com/watch?v=imWnuirIy8o", justwatch: "https://www.justwatch.com/us/movie/the-fugitive" },
-            { id: 7, title: "El Norte", year: 1983, genres: ["Drama", "Thriller"], synopsis: "A Guatemalan brother and sister flee persecution in their homeland and make a perilous journey through Mexico to reach 'El Norte' - the United States. A heartbreaking portrayal of the immigrant experience.", trailer: "https://www.youtube.com/watch?v=kkfMPNqS4HQ", justwatch: "https://www.justwatch.com/us/movie/el-norte" },
-            { id: 8, title: "Shutter Island", year: 2010, genres: ["Thriller", "Horror"], synopsis: "In 1954, U.S. Marshals investigate the disappearance of a patient from a hospital for the criminally insane on a remote island. As a hurricane traps them there, disturbing secrets surface and nothing is what it seems.", trailer: "https://www.youtube.com/watch?v=5iaYLCiq5RM", justwatch: "https://www.justwatch.com/us/movie/shutter-island" },
-            { id: 9, title: "The Giver", year: 2014, genres: ["Thriller", "Sci-Fi"], synopsis: "In a seemingly perfect community without war, pain, or suffering, a young man is chosen to learn from an elderly man about the true pain and pleasure of the 'real' world.", trailer: "https://www.youtube.com/watch?v=xvp6FnYbRoU", justwatch: "https://www.justwatch.com/us/movie/the-giver" },
-            { id: 10, title: "Attack the Block", year: 2011, genres: ["Action", "Thriller", "Sci-Fi", "Horror"], synopsis: "A teen gang in South London defends their block from an alien invasion on Bonfire Night. What starts as petty crime turns into an epic battle for survival.", trailer: "https://www.youtube.com/watch?v=cD0gm7dHKKc", justwatch: "https://www.justwatch.com/us/movie/attack-the-block" },
-            { id: 11, title: "Inside Man", year: 2006, genres: ["Thriller", "Action"], synopsis: "A detective matches wits with a bank robber whose heist becomes a hostage situation that's more elaborate than it appears. Buried secrets threaten powerful people.", trailer: "https://www.youtube.com/watch?v=gs7YLdkN3KE", justwatch: "https://www.justwatch.com/us/movie/inside-man" },
-            { id: 12, title: "Annihilation", year: 2018, genres: ["Thriller", "Sci-Fi", "Horror"], synopsis: "A biologist leads an expedition into an environmental disaster zone where the laws of nature don't apply. Mind-bending phenomena threaten their sanity.", trailer: "https://www.youtube.com/watch?v=89OP78l9oF0", justwatch: "https://www.justwatch.com/us/movie/annihilation-2018" },
-            { id: 13, title: "Cujo", year: 1983, genres: ["Thriller", "Horror", "Classic"], synopsis: "A friendly Saint Bernard is bitten by a rabid bat and turns into a killer. A mother and her young son become trapped in their stalled car by the rabid dog.", trailer: "https://www.youtube.com/watch?v=Fdff1pBhlBM", justwatch: "https://www.justwatch.com/us/movie/cujo" },
-            { id: 14, title: "Open Water", year: 2003, genres: ["Thriller", "Horror"], synopsis: "Based on true events, a couple on a scuba diving trip surfaces to find their tour boat has left them stranded in shark-infested waters.", trailer: "https://www.youtube.com/watch?v=19lJdmK9MV0", justwatch: "https://www.justwatch.com/us/movie/open-water" },
-            { id: 15, title: "Misery", year: 1990, genres: ["Thriller", "Horror"], synopsis: "A famous author is rescued by his 'number one fan' and taken to her remote cabin to recover. But her obsession turns deadly.", trailer: "https://www.youtube.com/watch?v=LxHftzNuzgg", justwatch: "https://www.justwatch.com/us/movie/misery" },
-            { id: 16, title: "Prisoners", year: 2013, genres: ["Thriller"], synopsis: "When two young girls disappear, a desperate father takes matters into his own hands. The line between justice and vengeance blurs dangerously.", trailer: "https://www.youtube.com/watch?v=bpXfcTF6iVk", justwatch: "https://www.justwatch.com/us/movie/prisoners" },
-            { id: 17, title: "The Sacrament", year: 2013, genres: ["Thriller", "Horror", "Documentary"], synopsis: "A news crew follows a man to an isolated religious community. What begins as paradise soon reveals a sinister cult. Inspired by true events.", trailer: "https://www.youtube.com/watch?v=2F6BgI62gs0", justwatch: "https://www.justwatch.com/us/movie/the-sacrament" },
-            { id: 18, title: "The Invitation", year: 2015, genres: ["Thriller", "Horror"], synopsis: "A man accepts an invitation to dinner at his ex-wife's home. His mounting paranoia leads to a shocking revelation that changes everything.", trailer: "https://www.youtube.com/watch?v=0-mp77SZ_0M", justwatch: "https://www.justwatch.com/us/movie/the-invitation-2015" },
-            { id: 19, title: "The Invisible Man", year: 2020, genres: ["Thriller", "Horror", "Sci-Fi"], synopsis: "After escaping her abusive boyfriend, a woman discovers he faked his suicide and is stalking her while invisible.", trailer: "https://www.youtube.com/watch?v=WO_FJdiY9dA", justwatch: "https://www.justwatch.com/us/movie/the-invisible-man-2020" },
-            { id: 20, title: "Disturbia", year: 2007, genres: ["Thriller", "Horror"], synopsis: "A troubled teen under house arrest suspects his neighbor is a serial killer. His surveillance leads him into dangerous territory.", trailer: "https://www.youtube.com/watch?v=0_omUniYJOY", justwatch: "https://www.justwatch.com/us/movie/disturbia" },
-            { id: 21, title: "No One Will Save You", year: 2023, genres: ["Thriller", "Sci-Fi", "Horror"], synopsis: "A young woman faces extraterrestrial beings invading her isolated home. With almost no dialogue, an intense fight for survival.", trailer: "https://www.youtube.com/watch?v=rhPuYMGmcHY", justwatch: "https://www.justwatch.com/us/movie/no-one-will-save-you" },
-            { id: 22, title: "Phone Booth", year: 2002, genres: ["Thriller"], synopsis: "A publicist is trapped in a phone booth by a sniper who knows his darkest secrets. The entire city watches as he's forced to confess.", trailer: "https://www.youtube.com/watch?v=v7tH1xVLmrg", justwatch: "https://www.justwatch.com/us/movie/phone-booth" },
-            { id: 23, title: "Dark Skies", year: 2013, genres: ["Thriller", "Sci-Fi", "Horror"], synopsis: "A suburban family discovers they're being targeted by a terrifying force from beyond our world.", trailer: "https://www.youtube.com/watch?v=_HuiPmrjPeM", justwatch: "https://www.justwatch.com/us/movie/dark-skies" },
-            { id: 24, title: "The Host", year: 2006, genres: ["Thriller", "Horror", "Action"], synopsis: "A mutant monster emerges from Seoul's Han River. A dysfunctional family must rescue their daughter from the creature's lair.", trailer: "https://www.youtube.com/watch?v=1EJklHbc_cc", justwatch: "https://www.justwatch.com/us/movie/the-host-2006" },
-            { id: 25, title: "Lost in Translation", year: 2003, genres: ["Romance", "Drama"], synopsis: "A faded movie star and a neglected young wife form an unlikely bond in Tokyo, finding connection amid alienation.", trailer: "https://www.youtube.com/watch?v=W6iVPCRflQM", justwatch: "https://www.justwatch.com/us/movie/lost-in-translation" },
-            { id: 26, title: "True Romance", year: 1993, genres: ["Romance", "Action", "Thriller"], synopsis: "A comic-book nerd and a call girl fall in love. After stealing cocaine from her pimp, they go on the run with gangsters in pursuit.", trailer: "https://www.youtube.com/watch?v=OFSvjGPdPFA", justwatch: "https://www.justwatch.com/us/movie/true-romance" },
-            { id: 27, title: "Love Actually", year: 2003, genres: ["Romance", "Drama"], synopsis: "Ten separate stories interweave in the weeks before Christmas in London, exploring love in all its forms.", trailer: "https://www.youtube.com/watch?v=H9Z3_ifFheQ", justwatch: "https://www.justwatch.com/us/movie/love-actually" },
-            { id: 28, title: "Poetic Justice", year: 1993, genres: ["Romance", "Drama", "Hood"], synopsis: "A young hairdresser and poet, grieving her boyfriend's murder, finds unexpected romance on a road trip to Oakland.", trailer: "https://www.youtube.com/watch?v=x1VHw2fKiyM", justwatch: "https://www.justwatch.com/us/movie/poetic-justice" },
-            { id: 29, title: "Above the Rim", year: 1994, genres: ["Drama", "Hood", "Action"], synopsis: "A high school basketball star is torn between his future and street life when a drug dealer tries to recruit him.", trailer: "https://www.youtube.com/watch?v=jbG9DAyrdLI", justwatch: "https://www.justwatch.com/us/movie/above-the-rim" },
-            { id: 30, title: "A Thin Line Between Love and Hate", year: 1996, genres: ["Romance", "Thriller", "Hood"], synopsis: "A charming nightclub promoter spurns a sophisticated businesswoman who reveals a dangerous obsession.", trailer: "https://www.youtube.com/watch?v=VMQP5NiNbSw", justwatch: "https://www.justwatch.com/us/movie/a-thin-line-between-love-and-hate" },
-            { id: 31, title: "The Pursuit of Happyness", year: 2006, genres: ["Drama"], synopsis: "Based on a true story, a struggling salesman faces homelessness while fighting to build a better life against impossible odds.", trailer: "https://www.youtube.com/watch?v=89Rj5qoAAjQ", justwatch: "https://www.justwatch.com/us/movie/the-pursuit-of-happyness" },
-            { id: 32, title: "White Men Can't Jump", year: 1992, genres: ["Drama", "Action", "Hood"], synopsis: "A white basketball hustler teams up with a Black street player to con their way through Los Angeles courts.", trailer: "https://www.youtube.com/watch?v=AccfqfSRHx8", justwatch: "https://www.justwatch.com/us/movie/white-men-cant-jump" },
-            { id: 33, title: "The Game", year: 1997, genres: ["Thriller"], synopsis: "A wealthy banker receives a mysterious game that integrates into his real life. He can't tell what's real anymore.", trailer: "https://www.youtube.com/watch?v=rCS6RJxpL2s", justwatch: "https://www.justwatch.com/us/movie/the-game" },
-            { id: 34, title: "Pacific Heights", year: 1990, genres: ["Thriller"], synopsis: "A young couple rents to a charming tenant who turns out to be a sociopathic con artist systematically destroying their lives.", trailer: "https://www.youtube.com/watch?v=s1oVGzS2N3s", justwatch: "https://www.justwatch.com/us/movie/pacific-heights" },
-            { id: 35, title: "Jurassic Park", year: 1993, genres: ["Action", "Thriller", "Sci-Fi"], synopsis: "Scientists visit an island theme park with dinosaurs. When security fails, they must survive prehistoric predators.", trailer: "https://www.youtube.com/watch?v=lc0UehYemQA", justwatch: "https://www.justwatch.com/us/movie/jurassic-park" },
-            { id: 36, title: "Marathon Man", year: 1976, genres: ["Thriller", "Classic"], synopsis: "A history student is hunted by a former Nazi war criminal seeking diamonds from a concentration camp.", trailer: "https://www.youtube.com/watch?v=dG3HFiFNODE", justwatch: "https://www.justwatch.com/us/movie/marathon-man" },
-            { id: 37, title: "The Tenant", year: 1976, genres: ["Thriller", "Horror", "Classic"], synopsis: "A shy bureaucrat rents an apartment where the previous tenant threw herself out the window. He becomes convinced neighbors are plotting against him.", trailer: "https://www.youtube.com/watch?v=IOjndZRb0VM", justwatch: "https://www.justwatch.com/us/movie/the-tenant" },
-            { id: 38, title: "The Vanishing", year: 1988, genres: ["Thriller", "Horror"], synopsis: "A man's girlfriend disappears. Years later, her kidnapper offers to show him the truth. Dutch original.", trailer: "https://www.youtube.com/watch?v=CwtMD7QXBPQ", justwatch: "https://www.justwatch.com/us/movie/the-vanishing-1988" },
-            { id: 39, title: "Akira", year: 1988, genres: ["Action", "Sci-Fi", "Classic"], synopsis: "In dystopian Neo-Tokyo, a biker gang member develops telekinetic abilities. His friend must stop him before he destroys everything.", trailer: "https://www.youtube.com/watch?v=wCgJb4BFBEc", justwatch: "https://www.justwatch.com/us/movie/akira" },
-            { id: 40, title: "The Silence of the Lambs", year: 1991, genres: ["Thriller", "Horror"], synopsis: "An FBI trainee seeks help from an imprisoned cannibal killer to catch another serial killer. A dangerous psychological dance.", trailer: "https://www.youtube.com/watch?v=W6Mm8Sbe__o", justwatch: "https://www.justwatch.com/us/movie/the-silence-of-the-lambs" },
-            { id: 41, title: "The Sting", year: 1973, genres: ["Thriller", "Classic"], synopsis: "Two con artists in 1930s Chicago set up an elaborate scheme to swindle a powerful crime boss. The ultimate long con.", trailer: "https://www.youtube.com/watch?v=JqclJwMXp0g", justwatch: "https://www.justwatch.com/us/movie/the-sting" },
-            { id: 42, title: "127 Hours", year: 2010, genres: ["Thriller", "Drama"], synopsis: "Based on a true story, a mountain climber becomes trapped under a boulder and must make a desperate decision to survive.", trailer: "https://www.youtube.com/watch?v=OlhLOWTnVoQ", justwatch: "https://www.justwatch.com/us/movie/127-hours" }
+    // ========================================================================
+    // DATA
+    // ========================================================================
+
+    const MOVIES = [
+        // COMEDY
+        { title: "Game Night", year: 2018, genres: ["Comedy", "Thriller"], desc: "A competitive game night turns into a real-life mystery when one couple's brother is kidnapped.", rating: 4, netflix: "Game+Night" },
+        { title: "The Hangover", year: 2009, genres: ["Comedy"], desc: "Three groomsmen retrace their steps after a wild Vegas bachelor party gone wrong.", rating: 4, netflix: "The+Hangover" },
+        { title: "Crazy Rich Asians", year: 2018, genres: ["Comedy", "Romance"], desc: "A woman discovers her boyfriend is one of the richest families in Singapore.", rating: 4, netflix: "Crazy+Rich+Asians" },
+        { title: "Bridesmaids", year: 2011, genres: ["Comedy"], desc: "A maid of honor's life unravels as she leads her best friend's bridal party.", rating: 4, netflix: "Bridesmaids" },
+        { title: "Girls Trip", year: 2017, genres: ["Comedy"], desc: "Four best friends reunite for a wild weekend at Essence Festival in New Orleans.", rating: 4, netflix: "Girls+Trip" },
+        { title: "Coming to America", year: 1988, genres: ["Comedy", "Romance"], desc: "An African prince travels to Queens, NY to find a bride who will love him for who he is.", rating: 5, netflix: "Coming+to+America" },
+        { title: "Friday", year: 1995, genres: ["Comedy"], desc: "Two friends in South Central LA navigate a wild Friday full of neighborhood drama.", rating: 5, netflix: "Friday" },
+        { title: "The Lovebirds", year: 2020, genres: ["Comedy", "Romance"], desc: "A couple on the brink of breaking up gets entangled in a murder mystery.", rating: 3, netflix: "The+Lovebirds" },
+        { title: "Set It Up", year: 2018, genres: ["Comedy", "Romance"], desc: "Two overworked assistants scheme to set up their demanding bosses.", rating: 3, netflix: "Set+It+Up" },
+        // THRILLER
+        { title: "Knives Out", year: 2019, genres: ["Thriller", "Comedy"], desc: "A detective investigates the death of a wealthy patriarch surrounded by scheming relatives.", rating: 5, netflix: "Knives+Out" },
+        { title: "Gone Girl", year: 2014, genres: ["Thriller", "Drama"], desc: "A man becomes the prime suspect when his wife mysteriously disappears on their anniversary.", rating: 5, netflix: "Gone+Girl" },
+        { title: "Get Out", year: 2017, genres: ["Thriller", "Horror"], desc: "A young Black man uncovers a disturbing secret when he visits his white girlfriend's family.", rating: 5, netflix: "Get+Out" },
+        { title: "Parasite", year: 2019, genres: ["Thriller", "Drama"], desc: "A poor family schemes to infiltrate a wealthy household with devastating consequences.", rating: 5, netflix: "Parasite" },
+        { title: "Shutter Island", year: 2010, genres: ["Thriller", "Horror"], desc: "U.S. Marshals investigate a disappearance at a remote asylum. Nothing is what it seems.", rating: 4, netflix: "Shutter+Island" },
+        { title: "The Invisible Man", year: 2020, genres: ["Thriller", "Horror"], desc: "A woman suspects her abusive ex faked his death and is stalking her while invisible.", rating: 4, netflix: "The+Invisible+Man+2020" },
+        { title: "Prisoners", year: 2013, genres: ["Thriller", "Drama"], desc: "When two girls disappear, a desperate father takes matters into his own hands.", rating: 5, netflix: "Prisoners" },
+        { title: "No One Will Save You", year: 2023, genres: ["Thriller", "Horror"], desc: "A woman faces an alien home invasion in this nearly dialogue-free thriller.", rating: 4, netflix: "No+One+Will+Save+You" },
+        { title: "Don't Breathe", year: 2016, genres: ["Thriller", "Horror"], desc: "Three thieves break into a blind man's house only to discover he's far more dangerous than they thought.", rating: 4, netflix: "Don%27t+Breathe" },
+        // ROMANCE
+        { title: "The Notebook", year: 2004, genres: ["Romance", "Drama"], desc: "A poor young man falls for a rich girl in 1940s South Carolina. Their love endures decades.", rating: 4, netflix: "The+Notebook" },
+        { title: "Love & Basketball", year: 2000, genres: ["Romance", "Drama"], desc: "Two childhood sweethearts chase their basketball dreams while navigating their relationship.", rating: 5, netflix: "Love+and+Basketball" },
+        { title: "The Best Man", year: 1999, genres: ["Romance", "Comedy", "Drama"], desc: "A writer's novel threatens to expose secrets at his best friend's wedding.", rating: 4, netflix: "The+Best+Man" },
+        { title: "Poetic Justice", year: 1993, genres: ["Romance", "Drama"], desc: "A young poet finds unexpected romance on a road trip to Oakland.", rating: 4, netflix: "Poetic+Justice" },
+        { title: "Think Like a Man", year: 2012, genres: ["Romance", "Comedy"], desc: "Four women use Steve Harvey's advice to get the upper hand on the men in their lives.", rating: 3, netflix: "Think+Like+a+Man" },
+        { title: "About Time", year: 2013, genres: ["Romance", "Comedy", "Drama"], desc: "A young man with the ability to time travel uses it to improve his love life.", rating: 4, netflix: "About+Time" },
+        { title: "Hitch", year: 2005, genres: ["Romance", "Comedy"], desc: "A professional dating consultant finds his own techniques don't work on the woman he loves.", rating: 4, netflix: "Hitch" },
+        { title: "A Thin Line Between Love and Hate", year: 1996, genres: ["Romance", "Thriller"], desc: "A charming nightclub promoter spurns a woman who reveals a dangerous obsession.", rating: 3, netflix: "A+Thin+Line+Between+Love+and+Hate" },
+        // ACTION
+        { title: "John Wick", year: 2014, genres: ["Action", "Thriller"], desc: "A retired hitman goes on a rampage after someone steals his car and kills his puppy.", rating: 5, netflix: "John+Wick" },
+        { title: "Top Gun: Maverick", year: 2022, genres: ["Action", "Drama"], desc: "Pete Mitchell trains a group of Top Gun graduates for a specialized mission.", rating: 5, netflix: "Top+Gun+Maverick" },
+        { title: "Spider-Man: Into the Spider-Verse", year: 2018, genres: ["Action", "Comedy"], desc: "Miles Morales becomes Spider-Man and teams up with spider-people from other dimensions.", rating: 5, netflix: "Spider-Man+Into+the+Spider-Verse" },
+        { title: "Black Panther", year: 2018, genres: ["Action", "Drama"], desc: "T'Challa returns home to Wakanda to take the throne but faces a powerful challenger.", rating: 5, netflix: "Black+Panther" },
+        { title: "Everything Everywhere All at Once", year: 2022, genres: ["Action", "Comedy", "Drama"], desc: "A laundromat owner discovers she can access the skills of alternate universe versions of herself.", rating: 5, netflix: "Everything+Everywhere+All+at+Once" },
+        { title: "Bad Boys", year: 1995, genres: ["Action", "Comedy"], desc: "Two Miami detectives go after a stolen stash of heroin while dealing with a reluctant witness.", rating: 4, netflix: "Bad+Boys" },
+        { title: "Training Day", year: 2001, genres: ["Action", "Thriller", "Drama"], desc: "A rookie cop spends a day with a corrupt narcotics detective in the streets of LA.", rating: 5, netflix: "Training+Day" },
+        // HORROR
+        { title: "A Quiet Place", year: 2018, genres: ["Horror", "Thriller"], desc: "A family must live in silence to avoid creatures that hunt by sound.", rating: 4, netflix: "A+Quiet+Place" },
+        { title: "Us", year: 2019, genres: ["Horror", "Thriller"], desc: "A family's beach vacation turns to terror when their doppelgangers appear.", rating: 4, netflix: "Us+2019" },
+        { title: "Nope", year: 2022, genres: ["Horror", "Thriller"], desc: "Residents of a California ranch discover something sinister in the skies above.", rating: 4, netflix: "Nope+2022" },
+        { title: "The Conjuring", year: 2013, genres: ["Horror"], desc: "Paranormal investigators help a family terrorized by a dark presence in their farmhouse.", rating: 4, netflix: "The+Conjuring" },
+        { title: "Hereditary", year: 2018, genres: ["Horror", "Drama"], desc: "After the family matriarch dies, a family begins to unravel terrifying secrets.", rating: 4, netflix: "Hereditary" },
+        { title: "It Follows", year: 2014, genres: ["Horror", "Thriller"], desc: "A young woman is pursued by a supernatural entity passed through intimate contact.", rating: 3, netflix: "It+Follows" },
+        // DOCUMENTARY
+        { title: "13th", year: 2016, genres: ["Documentary"], desc: "Explores the intersection of race, justice, and mass incarceration in the US.", rating: 5, netflix: "13th" },
+        { title: "Our Planet", year: 2019, genres: ["Documentary"], desc: "A stunning nature documentary series showcasing Earth's diverse habitats.", rating: 5, netflix: "Our+Planet" },
+        { title: "The Social Dilemma", year: 2020, genres: ["Documentary"], desc: "Tech insiders reveal how social media is reprogramming civilization.", rating: 4, netflix: "The+Social+Dilemma" },
+        { title: "Free Solo", year: 2018, genres: ["Documentary"], desc: "Alex Honnold attempts to climb El Capitan's 3,000-foot wall without a rope.", rating: 5, netflix: "Free+Solo" },
+        // DRAMA
+        { title: "The Pursuit of Happyness", year: 2006, genres: ["Drama"], desc: "A struggling salesman and his son face homelessness while chasing a better life.", rating: 5, netflix: "The+Pursuit+of+Happyness" },
+        { title: "Moonlight", year: 2016, genres: ["Drama"], desc: "Three chapters in the life of a young Black man growing up in Miami.", rating: 5, netflix: "Moonlight" },
+        { title: "Soul", year: 2020, genres: ["Drama", "Comedy"], desc: "A music teacher falls into the Great Before and must find his way back to his body.", rating: 4, netflix: "Soul+Pixar" },
+        { title: "The Shawshank Redemption", year: 1994, genres: ["Drama"], desc: "A banker sentenced to life in prison befriends a fellow inmate and finds hope.", rating: 5, netflix: "The+Shawshank+Redemption" },
+        { title: "Good Will Hunting", year: 1997, genres: ["Drama"], desc: "A genius janitor at MIT needs help from a psychologist to find direction.", rating: 5, netflix: "Good+Will+Hunting" },
+    ];
+
+    const ACTIVITIES = [
+        // SPECIFIC ATLANTA VENUES
+        { name: "Ponce City Market", tags: ["Food Hall", "Shopping", "Indoor"], price: "moderate", desc: "Explore the food hall, shop local vendors, and hit the rooftop amusements.", address: "675 Ponce De Leon Ave NE, Atlanta, GA 30308", url: "https://www.poncecitymarket.com/", groupon: null },
+        { name: "Atlanta Botanical Garden", tags: ["Outdoor", "Romantic", "Cultural"], price: "moderate", desc: "Stunning gardens and seasonal exhibitions. Beautiful at night with the lights.", address: "1345 Piedmont Ave NE, Atlanta, GA 30309", url: "https://atlantabg.org/", groupon: "https://www.groupon.com/deals/atlanta-botanical-garden" },
+        { name: "Piedmont Park Walk", tags: ["Outdoor", "Free", "Romantic"], price: "free", desc: "Atlanta's favorite green space. Walk the trails, have a picnic, watch the sunset.", address: "400 Park Dr NE, Atlanta, GA 30309", url: "https://piedmontpark.org/", groupon: null },
+        { name: "Krog Street Market", tags: ["Food Hall", "Shopping", "Indoor"], price: "moderate", desc: "Trendy food hall and retail space on the BeltLine. Great food variety.", address: "99 Krog St NE, Atlanta, GA 30307", url: "https://krogstreetmarket.com/", groupon: null },
+        { name: "Fernbank Museum", tags: ["Cultural", "Indoor"], price: "moderate", desc: "Natural history museum with dinosaur exhibits and a gorgeous outdoor forest.", address: "767 Clifton Rd, Atlanta, GA 30307", url: "https://www.fernbankmuseum.org/", groupon: "https://www.groupon.com/deals/fernbank-museum-of-natural-history" },
+        { name: "Stone Mountain Park", tags: ["Outdoor", "Adventure"], price: "budget", desc: "Hike to the summit, watch the laser show, or take the scenic train ride.", address: "1000 Robert E Lee Blvd, Stone Mountain, GA 30083", url: "https://www.stonemountainpark.com/", groupon: "https://www.groupon.com/deals/stone-mountain-park" },
+        { name: "Topgolf Midtown", tags: ["Active", "Fun", "Indoor"], price: "moderate", desc: "Hit golf balls at giant targets. Great food and drinks. No skill needed.", address: "1600 Ellsworth Industrial Blvd NW, Atlanta, GA 30318", url: "https://topgolf.com/us/atlanta/", groupon: "https://www.groupon.com/local/things-to-do/topgolf" },
+        { name: "Painting with a Twist", tags: ["Creative", "Romantic", "Indoor"], price: "moderate", desc: "Follow along and paint a masterpiece together. BYOB at most locations.", address: "Multiple Atlanta locations", url: "https://www.paintingwithatwist.com/studio/decatur/", groupon: "https://www.groupon.com/local/things-to-do/painting-class" },
+        { name: "The Escape Game Atlanta", tags: ["Active", "Fun", "Indoor"], price: "moderate", desc: "Immersive escape rooms with Hollywood-quality sets. Great team challenge.", address: "5900 Sugarloaf Pkwy Suite 147, Lawrenceville, GA 30043", url: "https://theescapegame.com/atlanta/", groupon: "https://www.groupon.com/local/things-to-do/escape-room" },
+        { name: "Dave & Buster's", tags: ["Fun", "Indoor", "Active"], price: "moderate", desc: "Arcade games, food, and drinks all in one place. Classic date energy.", address: "2215 D and B Dr, Marietta, GA 30067", url: "https://www.daveandbusters.com/", groupon: "https://www.groupon.com/local/things-to-do/dave-and-busters" },
+        // GENERAL ACTIVITIES
+        { name: "Escape Room", tags: ["Active", "Fun", "Indoor"], price: "moderate", desc: "Work together to solve puzzles and escape before time runs out.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/escape-room" },
+        { name: "Bowling", tags: ["Active", "Fun", "Indoor"], price: "budget", desc: "Classic date night vibes. Cosmic bowling is extra fun.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/bowling" },
+        { name: "Mini Golf", tags: ["Active", "Fun", "Outdoor"], price: "budget", desc: "Playful competition with a relaxed vibe. Great for conversation.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/mini-golf" },
+        { name: "Go Karts", tags: ["Active", "Fun", "Adventure"], price: "moderate", desc: "Race each other. Loser buys dessert.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/go-karts" },
+        { name: "Ax Throwing", tags: ["Active", "Adventure", "Fun"], price: "moderate", desc: "Surprisingly satisfying and fun to learn together.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/axe-throwing" },
+        { name: "Spa Day / Couples Massage", tags: ["Romantic", "Relaxing"], price: "splurge", desc: "Ultimate relaxation. Treat yourselves.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/spa" },
+        { name: "Comedy Show", tags: ["Fun", "Cultural", "Indoor"], price: "moderate", desc: "Laugh together at a local comedy club.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/comedy-show" },
+        { name: "Cooking Class", tags: ["Creative", "Romantic", "Fun"], price: "moderate", desc: "Learn to make something new together. Take the skills home.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/cooking-class" },
+        { name: "Picnic in the Park", tags: ["Romantic", "Free", "Outdoor"], price: "free", desc: "Pack food, bring a blanket, and enjoy being together outside.", address: null, url: null, groupon: null },
+        { name: "Stargazing", tags: ["Romantic", "Free", "Outdoor"], price: "free", desc: "Find a dark spot, bring blankets and snacks, and look up.", address: null, url: null, groupon: null },
+        { name: "Board Game Cafe", tags: ["Fun", "Relaxing", "Indoor"], price: "budget", desc: "Try new games with unlimited options. Usually has good snacks.", address: null, url: null, groupon: null },
+        { name: "Live Music / Concert", tags: ["Cultural", "Fun"], price: "moderate", desc: "See a band you love or discover someone new.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/concert" },
+        { name: "Karaoke Night", tags: ["Fun", "Indoor"], price: "budget", desc: "Sing your hearts out. Duets encouraged.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/karaoke" },
+        { name: "BeltLine Walk", tags: ["Outdoor", "Free", "Romantic"], price: "free", desc: "Walk the Atlanta BeltLine trail. Street art, food stops, and great people watching.", address: "Atlanta BeltLine Eastside Trail", url: "https://beltline.org/", groupon: null },
+        { name: "Drive-In Movie", tags: ["Romantic", "Fun", "Outdoor"], price: "budget", desc: "Old school romance. Bring blankets and snacks.", address: null, url: null, groupon: null },
+        { name: "Pottery Class", tags: ["Creative", "Romantic", "Fun"], price: "moderate", desc: "Get your hands dirty making something together. Very Ghost-vibes.", address: null, url: null, groupon: "https://www.groupon.com/local/things-to-do/pottery-class" },
+    ];
+
+    const DINNERS = [
+        // COOK AT HOME
+        { name: "Tacos", type: "cook", tags: ["Mexican", "Quick"], effort: "easy", desc: "Classic ground beef tacos with all the fixings.", recipe: "https://www.allrecipes.com/recipe/70935/authentic-homemade-tacos/" },
+        { name: "Spaghetti & Meatballs", type: "cook", tags: ["Italian", "Comfort"], effort: "easy", desc: "Homemade meatballs in marinara over pasta.", recipe: "https://www.allrecipes.com/recipe/21353/italian-spaghetti-sauce-with-meatballs/" },
+        { name: "Grilled Cheese & Tomato Soup", type: "cook", tags: ["American", "Quick"], effort: "easy", desc: "Crispy buttery sandwich with creamy soup.", recipe: "https://www.allrecipes.com/recipe/23891/grilled-cheese-sandwich/" },
+        { name: "Stir Fry", type: "cook", tags: ["Asian", "Quick", "Healthy"], effort: "easy", desc: "Quick veggie and protein stir fry over rice.", recipe: "https://www.allrecipes.com/recipe/228823/quick-beef-stir-fry/" },
+        { name: "Breakfast for Dinner", type: "cook", tags: ["American", "Quick"], effort: "easy", desc: "Pancakes, eggs, bacon. Brinner hits different.", recipe: null },
+        { name: "Quesadillas", type: "cook", tags: ["Mexican", "Quick"], effort: "easy", desc: "Cheesy, crispy tortillas with chicken or steak.", recipe: "https://www.allrecipes.com/recipe/24108/chicken-quesadillas/" },
+        { name: "Burgers", type: "both", tags: ["American", "Comfort", "Quick"], effort: "easy", desc: "Juicy homemade patties. Cheese is mandatory.", recipe: "https://www.allrecipes.com/recipe/25473/the-perfect-basic-burger/" },
+        { name: "Salmon & Veggies", type: "cook", tags: ["Healthy", "Quick"], effort: "easy", desc: "Pan-seared salmon with roasted vegetables.", recipe: "https://www.allrecipes.com/recipe/228285/simple-baked-salmon/" },
+        { name: "Chicken Alfredo", type: "cook", tags: ["Italian", "Comfort"], effort: "medium", desc: "Creamy parmesan sauce over fettuccine.", recipe: "https://www.allrecipes.com/recipe/23431/to-die-for-fettuccine-alfredo/" },
+        { name: "Fried Chicken", type: "both", tags: ["Soul Food", "Comfort"], effort: "medium", desc: "Crispy, juicy, seasoned perfection.", recipe: "https://www.allrecipes.com/recipe/8805/crispy-fried-chicken/" },
+        { name: "Jerk Chicken", type: "cook", tags: ["Caribbean", "Comfort"], effort: "medium", desc: "Spicy, aromatic Caribbean-style chicken.", recipe: "https://www.allrecipes.com/recipe/85700/jamaican-jerk-chicken/" },
+        { name: "Lasagna", type: "cook", tags: ["Italian", "Comfort"], effort: "involved", desc: "Layers of pasta, meat sauce, and cheese.", recipe: "https://www.allrecipes.com/recipe/23600/worlds-best-lasagna/" },
+        { name: "Shrimp & Grits", type: "cook", tags: ["Soul Food", "Comfort"], effort: "medium", desc: "Creamy grits topped with sauteed shrimp.", recipe: "https://www.allrecipes.com/recipe/21361/shrimp-and-grits/" },
+        { name: "Enchiladas", type: "cook", tags: ["Mexican", "Comfort"], effort: "medium", desc: "Rolled tortillas smothered in sauce and cheese.", recipe: "https://www.allrecipes.com/recipe/57302/easy-mole-chicken-enchiladas/" },
+        { name: "Curry", type: "cook", tags: ["Asian", "Comfort", "Healthy"], effort: "medium", desc: "Rich curry with coconut milk over jasmine rice.", recipe: "https://www.allrecipes.com/recipe/46822/indian-chicken-curry/" },
+        { name: "Pot Roast", type: "cook", tags: ["American", "Comfort"], effort: "involved", desc: "Slow-cooked beef with potatoes and carrots.", recipe: "https://www.allrecipes.com/recipe/16066/simple-perfect-pot-roast/" },
+        { name: "Oxtails", type: "cook", tags: ["Soul Food", "Caribbean"], effort: "involved", desc: "Fall-off-the-bone tender. Braised in rich gravy.", recipe: "https://www.allrecipes.com/recipe/216564/jamaican-oxtail-with-broad-beans/" },
+        { name: "Wings", type: "both", tags: ["American", "Quick", "Comfort"], effort: "easy", desc: "Hot, BBQ, lemon pepper - pick your poison.", recipe: "https://www.allrecipes.com/recipe/187822/baked-chicken-wings/" },
+        { name: "Seafood Boil", type: "both", tags: ["Soul Food", "Comfort"], effort: "medium", desc: "Crab legs, shrimp, sausage in Cajun butter.", recipe: "https://www.allrecipes.com/recipe/268449/seafood-boil-with-garlic-butter-sauce/" },
+        { name: "Baked Mac & Cheese", type: "cook", tags: ["Soul Food", "Comfort"], effort: "medium", desc: "Creamy, cheesy, with that crispy top.", recipe: "https://www.allrecipes.com/recipe/11679/homemade-mac-and-cheese/" },
+        { name: "Fish Tacos", type: "both", tags: ["Mexican", "Healthy", "Quick"], effort: "easy", desc: "Crispy fish with slaw and chipotle crema.", recipe: "https://www.allrecipes.com/recipe/127862/beer-battered-fish-tacos/" },
+        { name: "Jambalaya", type: "cook", tags: ["Soul Food", "Cajun"], effort: "medium", desc: "Spicy rice with shrimp, sausage, and chicken.", recipe: "https://www.allrecipes.com/recipe/234534/jambalaya/" },
+        { name: "Smothered Pork Chops", type: "cook", tags: ["Soul Food", "Comfort"], effort: "medium", desc: "Pan-fried chops smothered in onion gravy.", recipe: "https://www.allrecipes.com/recipe/219472/smothered-pork-chops/" },
+        { name: "Chicken Parmesan", type: "cook", tags: ["Italian", "Comfort"], effort: "medium", desc: "Breaded chicken topped with marinara and mozzarella.", recipe: "https://www.allrecipes.com/recipe/223042/chicken-parmesan/" },
+        { name: "Loaded Nachos", type: "both", tags: ["Mexican", "Quick"], effort: "easy", desc: "Chips piled high with cheese, meat, beans, and jalapenos.", recipe: "https://www.allrecipes.com/recipe/26091/beef-nachos/" },
+        { name: "Gumbo", type: "cook", tags: ["Soul Food", "Cajun"], effort: "involved", desc: "Rich roux-based stew with okra, sausage, seafood over rice.", recipe: "https://www.allrecipes.com/recipe/216888/chicken-and-sausage-gumbo/" },
+        { name: "Stuffed Peppers", type: "cook", tags: ["American", "Healthy"], effort: "medium", desc: "Bell peppers filled with seasoned beef, rice, and cheese.", recipe: "https://www.allrecipes.com/recipe/14048/stuffed-peppers/" },
+        // ORDER / GO OUT
+        { name: "Pizza", type: "order", tags: ["Italian", "Quick"], effort: "easy", desc: "The ultimate delivery classic.", recipe: null },
+        { name: "Chinese Takeout", type: "order", tags: ["Asian", "Quick"], effort: "easy", desc: "Orange chicken, lo mein, fried rice - the works.", recipe: null },
+        { name: "Thai Food", type: "order", tags: ["Asian", "Comfort"], effort: "easy", desc: "Pad Thai, green curry, drunken noodles.", recipe: null },
+        { name: "Sushi", type: "order", tags: ["Asian", "Healthy"], effort: "easy", desc: "Fresh rolls, sashimi, and tempura.", recipe: null },
+        { name: "BBQ", type: "order", tags: ["American", "Soul Food"], effort: "easy", desc: "Ribs, brisket, pulled pork with classic sides.", recipe: null },
+        { name: "Pho", type: "order", tags: ["Asian", "Healthy", "Comfort"], effort: "easy", desc: "Hot Vietnamese soup with rice noodles and herbs.", recipe: null },
+        { name: "Ramen", type: "order", tags: ["Asian", "Comfort"], effort: "easy", desc: "Rich broth, springy noodles, soft egg, pork.", recipe: null },
+        { name: "Indian Food", type: "order", tags: ["Asian", "Comfort"], effort: "easy", desc: "Butter chicken, tikka masala, naan bread.", recipe: null },
+        { name: "Mediterranean", type: "order", tags: ["Healthy", "Comfort"], effort: "easy", desc: "Shawarma, falafel, hummus, and pita.", recipe: null },
+    ];
+
+    const ATL_RESTAURANTS = [
+        { name: "Poor Calvin's", cuisine: "Asian Fusion", price: "$$", address: "510 Piedmont Ave NE, Atlanta", url: "https://www.poorcalvins.com/" },
+        { name: "Slutty Vegan", cuisine: "Vegan Comfort", price: "$", address: "Multiple Atlanta locations", url: "https://sluttyveganatl.com/" },
+        { name: "Fox Bros Bar-B-Q", cuisine: "BBQ", price: "$$", address: "1238 DeKalb Ave NE, Atlanta", url: "https://www.foxbrosbbq.com/" },
+        { name: "Busy Bee Cafe", cuisine: "Soul Food", price: "$", address: "810 Martin Luther King Jr Dr SW, Atlanta", url: "https://busybeecafe.com/" },
+        { name: "South City Kitchen", cuisine: "Southern", price: "$$", address: "1144 Crescent Ave NE, Atlanta", url: "https://www.southcitykitchen.com/" },
+        { name: "Arepa Mia", cuisine: "Venezuelan", price: "$", address: "Atlanta BeltLine, Krog Street", url: "https://www.arepamia.com/" },
+        { name: "Gunshow", cuisine: "Creative American", price: "$$$", address: "924 Garrett St SE, Atlanta", url: "https://www.gunshowatl.com/" },
+        { name: "Bacchanalia", cuisine: "Fine Dining", price: "$$$", address: "1460 Ellsworth Industrial Blvd NW, Atlanta", url: "https://starprovisions.com/bacchanalia/" },
+        { name: "Taqueria del Sol", cuisine: "Mexican", price: "$", address: "359 W Ponce De Leon Ave, Decatur", url: "https://taqueriadelsol.com/" },
+        { name: "Brush Sushi Izakaya", cuisine: "Japanese", price: "$$", address: "Decatur Square", url: "https://www.brushsushi.com/" },
+    ];
+
+    // ========================================================================
+    // STATE
+    // ========================================================================
+
+    const BUDGET = 200;
+    let state = loadState();
+
+    function loadState() {
+        const def = { dateLog: [], watchedMovies: [], heroOverride: null };
+        try {
+            const saved = JSON.parse(localStorage.getItem('dnd_state'));
+            return saved ? { ...def, ...saved } : def;
+        } catch { return def; }
+    }
+
+    function saveState() {
+        localStorage.setItem('dnd_state', JSON.stringify(state));
+    }
+
+    // ========================================================================
+    // UTILS
+    // ========================================================================
+
+    function getWeekNumber() {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), 0, 1);
+        const diff = now - start;
+        return Math.floor(diff / (7 * 24 * 60 * 60 * 1000));
+    }
+
+    function getNextFriday() {
+        const now = new Date();
+        const day = now.getDay();
+        const diff = (5 - day + 7) % 7 || 7;
+        const friday = new Date(now);
+        if (day === 5) { friday.setDate(now.getDate()); }
+        else { friday.setDate(now.getDate() + diff); }
+        return friday;
+    }
+
+    function formatDate(d) {
+        const date = new Date(d);
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    function formatDateFull(d) {
+        const date = new Date(d);
+        return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    function ratingStars(n) {
+        return Array(n).fill('').map(() => '<span style="color:#ff6b35">&#x1F525;</span>').join('');
+    }
+
+    function priceLabel(p) {
+        const map = { free: ['Free', 'price-free'], budget: ['$', 'price-budget'], moderate: ['$$', 'price-moderate'], splurge: ['$$$', 'price-splurge'] };
+        const [label, cls] = map[p] || ['$', 'price-budget'];
+        return `<span class="venue-price ${cls}">${label}</span>`;
+    }
+
+    function effortLabel(e) {
+        const map = { easy: ['Easy', 'effort-easy'], medium: ['Medium', 'effort-medium'], involved: ['Involved', 'effort-involved'] };
+        const [label, cls] = map[e] || ['', ''];
+        return label ? `<span class="effort-badge ${cls}">${label}</span>` : '';
+    }
+
+    // ========================================================================
+    // THIS WEEK TAB
+    // ========================================================================
+
+    function getWeeklyDate() {
+        if (state.heroOverride) return state.heroOverride;
+        const wk = getWeekNumber();
+        const activity = ACTIVITIES[wk % ACTIVITIES.length];
+        const dinner = DINNERS[wk % DINNERS.length];
+        const movie = MOVIES[wk % MOVIES.length];
+        return { activity, dinner, movie };
+    }
+
+    function renderHero() {
+        const { activity, dinner, movie } = getWeeklyDate();
+        const friday = getNextFriday();
+        const fridayStr = formatDateFull(friday);
+
+        document.getElementById('heroCard').innerHTML = `
+            <div class="hero-label">This Friday's Plan</div>
+            <div class="hero-friday">${fridayStr}</div>
+            <div class="hero-section">
+                <div class="hero-section-label">Activity</div>
+                <div class="hero-section-title">${activity.name}</div>
+                <div class="hero-section-desc">${activity.desc}</div>
+            </div>
+            <div class="hero-section">
+                <div class="hero-section-label">Dinner</div>
+                <div class="hero-section-title">${dinner.name}</div>
+                <div class="hero-section-desc">${dinner.desc}</div>
+            </div>
+            <div class="hero-section">
+                <div class="hero-section-label">Movie</div>
+                <div class="hero-section-title">${movie.title} (${movie.year})</div>
+                <div class="hero-section-desc">${movie.desc}</div>
+            </div>
+            <div class="hero-actions">
+                <button class="btn-did-this" onclick="logThisWeek()">We Did This!</button>
+                <button class="btn-shuffle" onclick="shuffleHero()">Shuffle</button>
+            </div>
+        `;
+
+        // Streak
+        const streak = calculateStreak();
+        const banner = document.getElementById('streakBanner');
+        if (streak > 0) {
+            banner.className = 'streak-banner';
+            banner.innerHTML = `${streak} Friday${streak > 1 ? 's' : ''} in a row! Keep it going!`;
+        } else {
+            banner.className = 'streak-banner empty';
+            banner.innerHTML = `No streak yet. Make this Friday count!`;
+        }
+
+        // Quick ideas
+        renderQuickIdeas();
+    }
+
+    function shuffleHero() {
+        const a = ACTIVITIES[Math.floor(Math.random() * ACTIVITIES.length)];
+        const d = DINNERS[Math.floor(Math.random() * DINNERS.length)];
+        const m = MOVIES[Math.floor(Math.random() * MOVIES.length)];
+        state.heroOverride = { activity: a, dinner: d, movie: m };
+        saveState();
+        renderHero();
+        showToast('Shuffled! New plan ready');
+    }
+
+    function logThisWeek() {
+        const { activity, dinner, movie } = getWeeklyDate();
+        const entry = {
+            id: Date.now(),
+            activity: activity.name + ' + ' + dinner.name + ' + ' + movie.title,
+            location: activity.address || '',
+            cost: 0,
+            date: getNextFriday().toISOString().split('T')[0]
+        };
+        state.dateLog.unshift(entry);
+        state.heroOverride = null;
+        saveState();
+        renderHero();
+        renderTracker();
+        showToast('Date logged! You two are crushing it');
+    }
+
+    function renderQuickIdeas() {
+        const ideas = [
+            { emoji: '&#x1F3AC;', label: 'Netflix Night', desc: 'Pick a movie, make popcorn, cuddle up' },
+            { emoji: '&#x1F373;', label: 'Cook Together', desc: 'Pick a recipe and make dinner as a team' },
+            { emoji: '&#x1F6B6;', label: 'Walk & Talk', desc: 'BeltLine or Piedmont Park sunset walk' },
+            { emoji: '&#x1F3B2;', label: 'Game Night In', desc: 'Board games, card games, or video games' },
         ];
-
-        // ==================== DINNER DATA ====================
-        let dinners = [
-            { id: 1, name: "Tacos", type: "both", tags: ["Mexican", "Quick", "Comfort"], effort: "easy", desc: "Classic ground beef tacos with all the fixings.", recipe: "https://www.allrecipes.com/recipe/70935/authentic-homemade-tacos/" },
-            { id: 2, name: "Spaghetti & Meatballs", type: "cook", tags: ["Italian", "Comfort", "Quick"], effort: "easy", desc: "Homemade meatballs in marinara over pasta.", recipe: "https://www.allrecipes.com/recipe/21353/italian-spaghetti-sauce-with-meatballs/" },
-            { id: 3, name: "Grilled Cheese & Tomato Soup", type: "cook", tags: ["American", "Comfort", "Quick"], effort: "easy", desc: "Crispy buttery sandwich with creamy soup.", recipe: "https://www.allrecipes.com/recipe/23891/grilled-cheese-sandwich/" },
-            { id: 4, name: "Stir Fry", type: "cook", tags: ["Asian", "Quick", "Healthy"], effort: "easy", desc: "Quick veggie and protein stir fry with soy sauce over rice.", recipe: "https://www.allrecipes.com/recipe/228823/quick-beef-stir-fry/" },
-            { id: 5, name: "Breakfast for Dinner", type: "cook", tags: ["American", "Quick", "Comfort"], effort: "easy", desc: "Pancakes, eggs, bacon - Brinner hits different.", recipe: null },
-            { id: 6, name: "Quesadillas", type: "cook", tags: ["Mexican", "Quick"], effort: "easy", desc: "Cheesy, crispy tortillas with chicken, steak, or just cheese.", recipe: "https://www.allrecipes.com/recipe/24108/chicken-quesadillas/" },
-            { id: 7, name: "Burgers", type: "both", tags: ["American", "Comfort", "Quick"], effort: "easy", desc: "Juicy homemade patties. Cheese is mandatory.", recipe: "https://www.allrecipes.com/recipe/25473/the-perfect-basic-burger/" },
-            { id: 8, name: "Salmon & Veggies", type: "cook", tags: ["Healthy", "Quick"], effort: "easy", desc: "Pan-seared or baked salmon with roasted vegetables.", recipe: "https://www.allrecipes.com/recipe/228285/simple-baked-salmon/" },
-            { id: 9, name: "Chicken Alfredo", type: "cook", tags: ["Italian", "Comfort"], effort: "medium", desc: "Creamy parmesan sauce over fettuccine with grilled chicken.", recipe: "https://www.allrecipes.com/recipe/23431/to-die-for-fettuccine-alfredo/" },
-            { id: 10, name: "Fried Chicken", type: "both", tags: ["Soul Food", "Comfort", "American"], effort: "medium", desc: "Crispy, juicy, seasoned perfection.", recipe: "https://www.allrecipes.com/recipe/8805/crispy-fried-chicken/" },
-            { id: 11, name: "Jerk Chicken", type: "cook", tags: ["Caribbean", "Comfort"], effort: "medium", desc: "Spicy, aromatic Caribbean-style chicken.", recipe: "https://www.allrecipes.com/recipe/85700/jamaican-jerk-chicken/" },
-            { id: 12, name: "Lasagna", type: "cook", tags: ["Italian", "Comfort"], effort: "involved", desc: "Layers of pasta, meat sauce, and cheese.", recipe: "https://www.allrecipes.com/recipe/23600/worlds-best-lasagna/" },
-            { id: 13, name: "Shrimp & Grits", type: "cook", tags: ["Soul Food", "Comfort"], effort: "medium", desc: "Creamy grits topped with sautéed shrimp in buttery sauce.", recipe: "https://www.allrecipes.com/recipe/21361/shrimp-and-grits/" },
-            { id: 14, name: "Enchiladas", type: "cook", tags: ["Mexican", "Comfort"], effort: "medium", desc: "Rolled tortillas smothered in sauce and cheese.", recipe: "https://www.allrecipes.com/recipe/57302/easy-mole-chicken-enchiladas/" },
-            { id: 15, name: "Curry", type: "cook", tags: ["Asian", "Comfort", "Healthy"], effort: "medium", desc: "Rich, aromatic curry with coconut milk over jasmine rice.", recipe: "https://www.allrecipes.com/recipe/46822/indian-chicken-curry/" },
-            { id: 16, name: "Pot Roast", type: "cook", tags: ["American", "Comfort"], effort: "involved", desc: "Slow-cooked beef with potatoes and carrots.", recipe: "https://www.allrecipes.com/recipe/16066/simple-perfect-pot-roast/" },
-            { id: 17, name: "Oxtails", type: "cook", tags: ["Soul Food", "Caribbean", "Comfort"], effort: "involved", desc: "Fall-off-the-bone tender. Braised in rich gravy.", recipe: "https://www.allrecipes.com/recipe/216564/jamaican-oxtail-with-broad-beans/" },
-            { id: 18, name: "Pizza", type: "order", tags: ["Italian", "Quick", "Comfort"], effort: "easy", desc: "The ultimate delivery classic.", recipe: null },
-            { id: 19, name: "Chinese Takeout", type: "order", tags: ["Asian", "Quick", "Comfort"], effort: "easy", desc: "Orange chicken, lo mein, fried rice - the works.", recipe: null },
-            { id: 20, name: "Thai Food", type: "order", tags: ["Asian", "Comfort"], effort: "easy", desc: "Pad Thai, green curry, drunken noodles.", recipe: null },
-            { id: 21, name: "Soul Food Restaurant", type: "order", tags: ["Soul Food", "Comfort"], effort: "easy", desc: "Fried chicken, mac & cheese, collard greens, cornbread.", recipe: null },
-            { id: 22, name: "Wings", type: "both", tags: ["American", "Quick", "Comfort"], effort: "easy", desc: "Hot, BBQ, lemon pepper - pick your poison.", recipe: "https://www.allrecipes.com/recipe/187822/baked-chicken-wings/" },
-            { id: 23, name: "Sushi", type: "order", tags: ["Asian", "Healthy"], effort: "easy", desc: "Fresh rolls, sashimi, and tempura.", recipe: null },
-            { id: 24, name: "BBQ", type: "order", tags: ["American", "Soul Food", "Comfort"], effort: "easy", desc: "Ribs, brisket, pulled pork with classic sides.", recipe: null },
-            { id: 25, name: "Mediterranean/Shawarma", type: "order", tags: ["Mediterranean", "Healthy"], effort: "easy", desc: "Shawarma, falafel, hummus, pita.", recipe: null },
-            { id: 26, name: "Indian Food", type: "order", tags: ["Asian", "Comfort"], effort: "easy", desc: "Butter chicken, tikka masala, naan bread.", recipe: null },
-            { id: 27, name: "Seafood Boil", type: "both", tags: ["Comfort", "Soul Food"], effort: "medium", desc: "Crab legs, shrimp, sausage in Cajun butter.", recipe: "https://www.allrecipes.com/recipe/268449/seafood-boil-with-garlic-butter-sauce/" },
-            { id: 28, name: "Steakhouse", type: "order", tags: ["American", "Comfort"], effort: "easy", desc: "Perfectly cooked steak with loaded baked potato.", recipe: null },
-            { id: 29, name: "Pho", type: "order", tags: ["Asian", "Healthy", "Comfort"], effort: "easy", desc: "Hot Vietnamese soup with rice noodles and herbs.", recipe: null },
-            { id: 30, name: "Ramen", type: "order", tags: ["Asian", "Comfort"], effort: "easy", desc: "Rich broth, springy noodles, soft egg, chashu pork.", recipe: null },
-            { id: 31, name: "Baked Mac & Cheese", type: "cook", tags: ["Soul Food", "Comfort", "American"], effort: "medium", desc: "Creamy, cheesy, with that crispy top.", recipe: "https://www.allrecipes.com/recipe/11679/homemade-mac-and-cheese/" },
-            { id: 32, name: "Fish Tacos", type: "both", tags: ["Mexican", "Healthy", "Quick"], effort: "easy", desc: "Crispy fish with slaw and chipotle crema.", recipe: "https://www.allrecipes.com/recipe/127862/beer-battered-fish-tacos/" },
-            { id: 33, name: "Jambalaya", type: "cook", tags: ["Soul Food", "Cajun", "Comfort"], effort: "medium", desc: "Spicy rice dish with shrimp, sausage, and chicken.", recipe: "https://www.allrecipes.com/recipe/234534/jambalaya/" },
-            { id: 34, name: "Smothered Pork Chops", type: "cook", tags: ["Soul Food", "Comfort"], effort: "medium", desc: "Pan-fried chops smothered in rich onion gravy.", recipe: "https://www.allrecipes.com/recipe/219472/smothered-pork-chops/" },
-            { id: 35, name: "Chicken Parmesan", type: "cook", tags: ["Italian", "Comfort"], effort: "medium", desc: "Breaded chicken topped with marinara and mozzarella.", recipe: "https://www.allrecipes.com/recipe/223042/chicken-parmesan/" },
-            { id: 36, name: "Salmon Cakes", type: "cook", tags: ["Soul Food", "Healthy", "Quick"], effort: "easy", desc: "Pan-fried salmon patties. Crispy outside, tender inside.", recipe: "https://www.allrecipes.com/recipe/14117/salmon-patties-ii/" },
-            { id: 37, name: "Loaded Nachos", type: "both", tags: ["Mexican", "Quick", "Comfort"], effort: "easy", desc: "Chips piled high with cheese, meat, beans, jalapeños.", recipe: "https://www.allrecipes.com/recipe/26091/beef-nachos/" },
-            { id: 38, name: "Gumbo", type: "cook", tags: ["Soul Food", "Cajun", "Comfort"], effort: "involved", desc: "Rich roux-based stew with okra, sausage, seafood over rice.", recipe: "https://www.allrecipes.com/recipe/216888/chicken-and-sausage-gumbo/" },
-            { id: 39, name: "Stuffed Peppers", type: "cook", tags: ["American", "Healthy"], effort: "medium", desc: "Bell peppers filled with seasoned beef, rice, and cheese.", recipe: "https://www.allrecipes.com/recipe/14048/stuffed-peppers/" },
-            { id: 40, name: "Cabbage Rolls", type: "cook", tags: ["Comfort", "European"], effort: "involved", desc: "Cabbage leaves stuffed with savory meat and rice in tomato sauce.", recipe: "https://www.allrecipes.com/recipe/22030/sarma-serbian-stuffed-cabbage-rolls/" }
-        ];
-
-        // ==================== DATE NIGHT DATA ====================
-        let dateActivities = [
-            // ACTIVE / ADVENTURE
-            { id: 1, name: "Escape Room", tags: ["Active", "Fun", "Indoor"], price: "moderate", desc: "Work together to solve puzzles and escape before time runs out. Great for teamwork!", grouponActivity: "https://www.groupon.com/local/things-to-do/escape-room" },
-            { id: 2, name: "Bowling", tags: ["Active", "Fun", "Indoor"], price: "budget", desc: "Classic date night vibes. Cosmic bowling is extra fun.", grouponActivity: "https://www.groupon.com/local/things-to-do/bowling" },
-            { id: 3, name: "Mini Golf", tags: ["Active", "Fun", "Outdoor"], price: "budget", desc: "Playful competition with a relaxed vibe. Great for conversation.", grouponActivity: "https://www.groupon.com/local/things-to-do/mini-golf" },
-            { id: 4, name: "Go Karts", tags: ["Active", "Fun", "Adventure"], price: "moderate", desc: "Race each other! Loser buys dessert.", grouponActivity: "https://www.groupon.com/local/things-to-do/go-karts" },
-            { id: 5, name: "Laser Tag", tags: ["Active", "Fun", "Indoor"], price: "budget", desc: "Run around like kids again. It's more fun than you remember.", grouponActivity: "https://www.groupon.com/local/things-to-do/laser-tag" },
-            { id: 6, name: "Ax Throwing", tags: ["Active", "Adventure", "Fun"], price: "moderate", desc: "Surprisingly satisfying and fun to learn together.", grouponActivity: "https://www.groupon.com/local/things-to-do/axe-throwing" },
-            { id: 7, name: "Trampoline Park", tags: ["Active", "Fun", "Indoor"], price: "budget", desc: "Jump around, play dodgeball, feel like a kid again.", grouponActivity: "https://www.groupon.com/local/things-to-do/trampoline-park" },
-            { id: 8, name: "Hiking / Nature Walk", tags: ["Active", "Free", "Outdoor", "Romantic"], price: "free", desc: "Find a scenic trail and enjoy nature together. Pack snacks!", grouponActivity: null },
-            { id: 9, name: "Bike Ride", tags: ["Active", "Free", "Outdoor"], price: "free", desc: "Explore your city or a local trail on two wheels.", grouponActivity: null },
-            { id: 10, name: "Rock Climbing Gym", tags: ["Active", "Adventure", "Indoor"], price: "moderate", desc: "Challenge yourselves and cheer each other on.", grouponActivity: "https://www.groupon.com/local/things-to-do/rock-climbing" },
-
-            // CHILL / RELAXED
-            { id: 11, name: "Spa Day / Couples Massage", tags: ["Chill", "Romantic", "Splurge"], price: "splurge", desc: "Ultimate relaxation. Treat yourselves.", grouponActivity: "https://www.groupon.com/local/things-to-do/spa" },
-            { id: 12, name: "Wine Tasting", tags: ["Chill", "Romantic", "Cultural"], price: "moderate", desc: "Sample wines and learn something new together.", grouponActivity: "https://www.groupon.com/local/food-and-drink/wine-tasting" },
-            { id: 13, name: "Picnic in the Park", tags: ["Chill", "Romantic", "Free", "Outdoor"], price: "free", desc: "Pack some food, bring a blanket, and enjoy being outside together.", grouponActivity: null },
-            { id: 14, name: "Bookstore Browse + Coffee", tags: ["Chill", "Free", "Indoor"], price: "free", desc: "Wander a bookstore, pick books for each other, then coffee.", grouponActivity: null },
-            { id: 15, name: "Stargazing", tags: ["Chill", "Romantic", "Free", "Outdoor"], price: "free", desc: "Find a dark spot away from city lights. Bring blankets and snacks.", grouponActivity: null },
-            { id: 16, name: "Farmers Market", tags: ["Chill", "Cultural", "Outdoor"], price: "budget", desc: "Walk around, sample food, pick up ingredients for cooking together.", grouponActivity: null },
-
-            // FUN / GAMES
-            { id: 17, name: "Arcade / Barcade", tags: ["Fun", "Indoor", "Active"], price: "budget", desc: "Play classic games, win tickets, be competitive.", grouponActivity: "https://www.groupon.com/local/things-to-do/arcade" },
-            { id: 18, name: "Trivia Night", tags: ["Fun", "Indoor"], price: "budget", desc: "Team up at a local bar's trivia night. Put your combined knowledge to the test.", grouponActivity: null },
-            { id: 19, name: "Comedy Show", tags: ["Fun", "Cultural", "Indoor"], price: "moderate", desc: "Laugh together! Check local clubs or theaters.", grouponActivity: "https://www.groupon.com/local/things-to-do/comedy-show" },
-            { id: 20, name: "Karaoke Night", tags: ["Fun", "Indoor"], price: "budget", desc: "Sing your hearts out. Duets encouraged!", grouponActivity: "https://www.groupon.com/local/things-to-do/karaoke" },
-            { id: 21, name: "Board Game Cafe", tags: ["Fun", "Chill", "Indoor"], price: "budget", desc: "Try new games with unlimited options. Usually has good snacks too.", grouponActivity: null },
-            { id: 22, name: "Dave & Buster's", tags: ["Fun", "Indoor", "Active"], price: "moderate", desc: "Games, food, drinks - all in one place.", grouponActivity: "https://www.groupon.com/local/things-to-do/dave-and-busters" },
-
-            // CULTURAL
-            { id: 23, name: "Museum Visit", tags: ["Cultural", "Indoor"], price: "budget", desc: "Art, history, science - pick your interest and explore together.", grouponActivity: "https://www.groupon.com/local/things-to-do/museum" },
-            { id: 24, name: "Art Gallery Opening", tags: ["Cultural", "Free", "Indoor"], price: "free", desc: "Free wine, interesting art, great conversation starter.", grouponActivity: null },
-            { id: 25, name: "Live Music / Concert", tags: ["Cultural", "Fun"], price: "moderate", desc: "See a band you love or discover someone new.", grouponActivity: "https://www.groupon.com/local/things-to-do/concert" },
-            { id: 26, name: "Theater / Play", tags: ["Cultural", "Romantic"], price: "moderate", desc: "Support local theater. Dress up and make it special.", grouponActivity: "https://www.groupon.com/local/things-to-do/theater" },
-            { id: 27, name: "Cooking Class", tags: ["Cultural", "Romantic", "Fun"], price: "moderate", desc: "Learn to make something new together. Take the skills home!", grouponActivity: "https://www.groupon.com/local/things-to-do/cooking-class" },
-            { id: 28, name: "Paint & Sip", tags: ["Cultural", "Chill", "Fun"], price: "moderate", desc: "Create art together while enjoying wine. No skill required.", grouponActivity: "https://www.groupon.com/local/things-to-do/painting-class" },
-            { id: 29, name: "Pottery Class", tags: ["Cultural", "Romantic", "Fun"], price: "moderate", desc: "Get your hands dirty making something together.", grouponActivity: "https://www.groupon.com/local/things-to-do/pottery-class" },
-            { id: 30, name: "Botanical Garden", tags: ["Cultural", "Romantic", "Outdoor"], price: "budget", desc: "Beautiful scenery, peaceful walks, great photo ops.", grouponActivity: "https://www.groupon.com/local/things-to-do/botanical-garden" },
-
-            // ROMANTIC
-            { id: 31, name: "Sunset Dinner Cruise", tags: ["Romantic", "Splurge"], price: "splurge", desc: "Dinner on the water watching the sunset. Top tier romance.", grouponActivity: "https://www.groupon.com/local/things-to-do/cruise" },
-            { id: 32, name: "Rooftop Bar", tags: ["Romantic", "Chill"], price: "moderate", desc: "City views, cocktails, and vibes.", grouponActivity: "https://www.groupon.com/local/food-and-drink/rooftop-bar" },
-            { id: 33, name: "Drive-In Movie", tags: ["Romantic", "Chill", "Fun"], price: "budget", desc: "Old school romance. Bring blankets and snacks.", grouponActivity: null },
-            { id: 34, name: "Hot Air Balloon Ride", tags: ["Romantic", "Adventure", "Splurge"], price: "splurge", desc: "Bucket list experience with incredible views.", grouponActivity: "https://www.groupon.com/local/things-to-do/hot-air-balloon" },
-            { id: 35, name: "Fancy Dinner Out", tags: ["Romantic", "Splurge"], price: "splurge", desc: "Dress up, go somewhere special, make it a night to remember.", grouponActivity: "https://www.groupon.com/local/food-and-drink/fine-dining" }
-        ];
-
-        let dateFoods = [
-            { id: 101, name: "Italian Restaurant", tags: ["Romantic", "Comfort"], price: "moderate", desc: "Pasta, wine, and candlelit vibes.", grouponFood: "https://www.groupon.com/local/food-and-drink/italian" },
-            { id: 102, name: "Sushi Bar", tags: ["Fun", "Healthy"], price: "moderate", desc: "Fresh rolls and sake. Sit at the bar for the experience.", grouponFood: "https://www.groupon.com/local/food-and-drink/sushi" },
-            { id: 103, name: "Mexican Cantina", tags: ["Fun", "Comfort"], price: "budget", desc: "Tacos, margaritas, and good energy.", grouponFood: "https://www.groupon.com/local/food-and-drink/mexican" },
-            { id: 104, name: "Steakhouse", tags: ["Romantic", "Splurge"], price: "splurge", desc: "Treat yourselves to a quality steak dinner.", grouponFood: "https://www.groupon.com/local/food-and-drink/steakhouse" },
-            { id: 105, name: "Thai Restaurant", tags: ["Fun", "Comfort"], price: "budget", desc: "Bold flavors, great for sharing.", grouponFood: "https://www.groupon.com/local/food-and-drink/thai" },
-            { id: 106, name: "BBQ Joint", tags: ["Fun", "Comfort"], price: "moderate", desc: "Ribs, brisket, and good times.", grouponFood: "https://www.groupon.com/local/food-and-drink/bbq" },
-            { id: 107, name: "Brunch Spot", tags: ["Chill", "Fun"], price: "moderate", desc: "Perfect for a daytime date. Mimosas included.", grouponFood: "https://www.groupon.com/local/food-and-drink/brunch" },
-            { id: 108, name: "Tapas / Small Plates", tags: ["Romantic", "Fun"], price: "moderate", desc: "Share a bunch of dishes. Great for conversation.", grouponFood: "https://www.groupon.com/local/food-and-drink/tapas" },
-            { id: 109, name: "Korean BBQ", tags: ["Fun", "Active"], price: "moderate", desc: "Grill your own meat at the table. Interactive and delicious.", grouponFood: "https://www.groupon.com/local/food-and-drink/korean" },
-            { id: 110, name: "Seafood Restaurant", tags: ["Romantic", "Splurge"], price: "splurge", desc: "Fresh catches and ocean vibes.", grouponFood: "https://www.groupon.com/local/food-and-drink/seafood" },
-            { id: 111, name: "Pizza Place", tags: ["Chill", "Budget"], price: "budget", desc: "Can't go wrong with good pizza.", grouponFood: "https://www.groupon.com/local/food-and-drink/pizza" },
-            { id: 112, name: "Indian Restaurant", tags: ["Fun", "Comfort"], price: "moderate", desc: "Rich curries, naan bread, and bold spices.", grouponFood: "https://www.groupon.com/local/food-and-drink/indian" },
-            { id: 113, name: "Ramen Shop", tags: ["Chill", "Comfort"], price: "budget", desc: "Warm bowls of comfort. Slurp away.", grouponFood: "https://www.groupon.com/local/food-and-drink/ramen" },
-            { id: 114, name: "Mediterranean Grill", tags: ["Healthy", "Chill"], price: "moderate", desc: "Fresh, flavorful, and feels good.", grouponFood: "https://www.groupon.com/local/food-and-drink/mediterranean" },
-            { id: 115, name: "Food Hall / Food Court", tags: ["Fun", "Budget"], price: "budget", desc: "Options for everyone. Try a few different things.", grouponFood: null },
-            { id: 116, name: "Dessert Bar / Ice Cream", tags: ["Romantic", "Chill"], price: "budget", desc: "End the night (or start it) with something sweet.", grouponFood: "https://www.groupon.com/local/food-and-drink/dessert" },
-            { id: 117, name: "Southern/Soul Food", tags: ["Comfort", "Fun"], price: "moderate", desc: "Fried chicken, mac & cheese, and all the fixings.", grouponFood: "https://www.groupon.com/local/food-and-drink/soul-food" },
-            { id: 118, name: "French Bistro", tags: ["Romantic", "Splurge"], price: "splurge", desc: "Ooh la la. Elegant and delicious.", grouponFood: "https://www.groupon.com/local/food-and-drink/french" }
-        ];
-
-        // ==================== STATE ====================
-        let watchedMovies = JSON.parse(localStorage.getItem('watchedMovies') || '[]');
-        let eatenDinners = JSON.parse(localStorage.getItem('eatenDinners') || '[]');
-        let doneDates = JSON.parse(localStorage.getItem('doneDates') || '[]');
-        let currentMovieFilter = 'all';
-        let currentDinnerFilter = 'all';
-        let currentDateFilter = 'all';
-        let dinnerMode = 'all';
-
-        // Load user-added items
-        const userMovies = JSON.parse(localStorage.getItem('userMovies') || '[]');
-        movies = [...movies, ...userMovies];
-        const userDinners = JSON.parse(localStorage.getItem('userDinners') || '[]');
-        dinners = [...dinners, ...userDinners];
-        const userDates = JSON.parse(localStorage.getItem('userDates') || '[]');
-        dateActivities = [...dateActivities, ...userDates];
-
-        // ==================== DOM ELEMENTS ====================
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        // ==================== TAB SWITCHING ====================
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tab = btn.dataset.tab;
-                tabBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === tab + 'Tab') content.classList.add('active');
-                });
-            });
-        });
-
-        // ==================== MOVIE FUNCTIONS ====================
-        function getFilteredMovies() {
-            let filtered = movies.filter(m => !watchedMovies.includes(m.id));
-            if (currentMovieFilter !== 'all') {
-                const filterMap = { 'thriller': ['Thriller'], 'action': ['Action'], 'horror': ['Horror'], 'romance': ['Romance'], 'classic': ['Classic'], 'documentary': ['Documentary'], 'scifi': ['Sci-Fi'] };
-                const genres = filterMap[currentMovieFilter] || [];
-                filtered = filtered.filter(m => m.genres.some(g => genres.some(f => g.toLowerCase().includes(f.toLowerCase()))));
-            }
-            return filtered;
-        }
-
-        function spinForMovies() {
-            const available = getFilteredMovies();
-            if (available.length === 0) { document.getElementById('movieResults').innerHTML = `<div class="empty-state"><h3>No movies available!</h3></div>`; return; }
-            const spinBtn = document.getElementById('spinMovieBtn');
-            spinBtn.classList.add('spinning'); spinBtn.disabled = true;
-            let spins = 0;
-            const spinInterval = setInterval(() => {
-                displayMovies([...available].sort(() => Math.random() - 0.5).slice(0, 3), true);
-                if (++spins >= 10) {
-                    clearInterval(spinInterval);
-                    spinBtn.classList.remove('spinning'); spinBtn.disabled = false;
-                    displayMovies([...available].sort(() => Math.random() - 0.5).slice(0, Math.min(3, available.length)), false);
-                }
-            }, 150);
-        }
-
-        function displayMovies(list, spinning) {
-            document.getElementById('movieResults').innerHTML = list.map(m => `
-                <div class="card"><h3>${m.title} ${m.year ? `(${m.year})` : ''}</h3>
-                <div class="card-meta">${m.genres.map(g => `<span class="tag">${g}</span>`).join('')}</div>
-                <p>${m.synopsis}</p>
-                <div class="card-links">
-                    ${m.trailer ? `<a href="${m.trailer}" target="_blank" class="card-link trailer-link">▶ Trailer</a>` : ''}
-                    <a href="https://www.cineby.gd/search?keyword=${encodeURIComponent(m.title)}" target="_blank" class="card-link stream-link" >🎬 Watch Free</a>
-                    ${!spinning ? `<button class="card-link pick-btn" onclick="pickMovie(${m.id})">✓ Watching This!</button>` : ''}
-                </div></div>
-            `).join('');
-        }
-
-        function pickMovie(id) {
-            if (!watchedMovies.includes(id)) {
-                watchedMovies.push(id); localStorage.setItem('watchedMovies', JSON.stringify(watchedMovies));
-                updateWatchedList(); updateMovieStats();
-                const m = movies.find(x => x.id === id);
-                document.getElementById('movieResults').innerHTML = `<div class="card" style="border: 2px solid #4CAF50;"><h3>🎉 Tonight's Pick: ${m.title}</h3><p>${m.synopsis}</p><div class="card-links">${m.trailer ? `<a href="${m.trailer}" target="_blank" class="card-link trailer-link">▶ Trailer</a>` : ''}<a href="https://www.cineby.gd/search?keyword=${encodeURIComponent(m.title)}" target="_blank" class="card-link stream-link" >🎬 Watch Free</a></div><p style="margin-top: 15px; color: #81c784;">Enjoy your movie! 🍿</p></div>`;
-            }
-        }
-
-        function updateWatchedList() {
-            const list = movies.filter(m => watchedMovies.includes(m.id));
-            document.getElementById('watchedList').innerHTML = list.length ? list.map(m => `<span class="history-item">${m.title}<button class="remove-history" onclick="watchedMovies=watchedMovies.filter(i=>i!=${m.id});localStorage.setItem('watchedMovies',JSON.stringify(watchedMovies));updateWatchedList();updateMovieStats();">×</button></span>`).join('') : '<p style="color: #a0a0a0;">No movies watched yet.</p>';
-        }
-
-        function updateMovieStats() {
-            document.getElementById('movieCount').textContent = getFilteredMovies().length;
-            document.getElementById('watchedCount').textContent = watchedMovies.length;
-        }
-
-        // ==================== DINNER FUNCTIONS ====================
-        function getFilteredDinners() {
-            let filtered = dinners.filter(d => !eatenDinners.includes(d.id));
-            if (dinnerMode === 'cook') filtered = filtered.filter(d => d.type === 'cook' || d.type === 'both');
-            else if (dinnerMode === 'order') filtered = filtered.filter(d => d.type === 'order' || d.type === 'both');
-            if (currentDinnerFilter !== 'all') {
-                const filterMap = { 'quick': ['Quick'], 'comfort': ['Comfort'], 'healthy': ['Healthy'], 'mexican': ['Mexican'], 'asian': ['Asian'], 'italian': ['Italian'], 'american': ['American'], 'soul': ['Soul Food', 'Cajun'] };
-                const tags = filterMap[currentDinnerFilter] || [];
-                filtered = filtered.filter(d => d.tags.some(t => tags.some(f => t.toLowerCase().includes(f.toLowerCase()))));
-            }
-            return filtered;
-        }
-
-        function spinForDinners() {
-            const available = getFilteredDinners();
-            if (available.length === 0) { document.getElementById('dinnerResults').innerHTML = `<div class="empty-state"><h3>No dinner options!</h3></div>`; return; }
-            const spinBtn = document.getElementById('spinDinnerBtn');
-            spinBtn.classList.add('spinning'); spinBtn.disabled = true;
-            let spins = 0;
-            const spinInterval = setInterval(() => {
-                displayDinners([...available].sort(() => Math.random() - 0.5).slice(0, 3), true);
-                if (++spins >= 10) {
-                    clearInterval(spinInterval);
-                    spinBtn.classList.remove('spinning'); spinBtn.disabled = false;
-                    displayDinners([...available].sort(() => Math.random() - 0.5).slice(0, Math.min(3, available.length)), false);
-                }
-            }, 150);
-        }
-
-        function displayDinners(list, spinning) {
-            const effortLabels = { easy: '⚡ Easy', medium: '👨‍🍳 Medium', involved: '🔥 Involved' };
-            const effortClass = { easy: 'effort-easy', medium: 'effort-medium', involved: 'effort-involved' };
-            document.getElementById('dinnerResults').innerHTML = list.map(d => `
-                <div class="card dinner-card"><h3>${d.name} <span class="effort-badge ${effortClass[d.effort]}">${effortLabels[d.effort]}</span></h3>
-                <div class="card-meta">${d.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-                <p>${d.desc}</p>
-                <div class="card-links">
-                    ${d.recipe ? `<a href="${d.recipe}" target="_blank" class="card-link recipe-link">📖 Recipe</a>` : ''}
-                    ${d.type !== 'cook' ? `<a href="https://www.doordash.com/search/store/${encodeURIComponent(d.name)}/" target="_blank" class="card-link order-link">🚗 Order</a>` : ''}
-                    ${!spinning ? `<button class="card-link pick-btn" onclick="pickDinner(${d.id})">✓ Eating This!</button>` : ''}
-                </div></div>
-            `).join('');
-        }
-
-        function pickDinner(id) {
-            if (!eatenDinners.includes(id)) {
-                eatenDinners.push(id); localStorage.setItem('eatenDinners', JSON.stringify(eatenDinners));
-                updateEatenList(); updateDinnerStats();
-                const d = dinners.find(x => x.id === id);
-                document.getElementById('dinnerResults').innerHTML = `<div class="card dinner-card" style="border: 2px solid #4CAF50;"><h3>🎉 Tonight's Dinner: ${d.name}</h3><p>${d.desc}</p><p style="margin-top: 15px; color: #81c784;">Enjoy your meal! 🍽️</p></div>`;
-            }
-        }
-
-        function updateEatenList() {
-            const list = dinners.filter(d => eatenDinners.includes(d.id));
-            document.getElementById('eatenList').innerHTML = list.length ? list.map(d => `<span class="history-item">${d.name}<button class="remove-history" onclick="eatenDinners=eatenDinners.filter(i=>i!=${d.id});localStorage.setItem('eatenDinners',JSON.stringify(eatenDinners));updateEatenList();updateDinnerStats();">×</button></span>`).join('') : '<p style="color: #a0a0a0;">No recent dinners tracked.</p>';
-        }
-
-        function updateDinnerStats() {
-            document.getElementById('dinnerCount').textContent = getFilteredDinners().length;
-            document.getElementById('eatenCount').textContent = eatenDinners.length;
-        }
-
-        // ==================== DATE NIGHT FUNCTIONS ====================
-        function getFilteredDates() {
-            let filtered = dateActivities.filter(d => !doneDates.includes(d.id));
-            if (currentDateFilter !== 'all') {
-                const filterMap = { 'active': ['Active', 'Adventure'], 'chill': ['Chill'], 'romantic': ['Romantic'], 'fun': ['Fun'], 'cultural': ['Cultural'], 'free': ['Free'] };
-                const tags = filterMap[currentDateFilter] || [];
-                filtered = filtered.filter(d => d.tags.some(t => tags.some(f => t.toLowerCase().includes(f.toLowerCase()))));
-            }
-            return filtered;
-        }
-
-        function spinForDates() {
-            const availableActivities = getFilteredDates();
-            const availableFoods = dateFoods;
-            if (availableActivities.length === 0) { document.getElementById('dateResults').innerHTML = `<div class="empty-state"><h3>No date ideas available!</h3></div>`; return; }
-            const spinBtn = document.getElementById('spinDateBtn');
-            spinBtn.classList.add('spinning'); spinBtn.disabled = true;
-            let spins = 0;
-            const spinInterval = setInterval(() => {
-                const activity = availableActivities[Math.floor(Math.random() * availableActivities.length)];
-                const food = availableFoods[Math.floor(Math.random() * availableFoods.length)];
-                displayDatePlan(activity, food, true);
-                if (++spins >= 10) {
-                    clearInterval(spinInterval);
-                    spinBtn.classList.remove('spinning'); spinBtn.disabled = false;
-                    const finalActivity = availableActivities[Math.floor(Math.random() * availableActivities.length)];
-                    const finalFood = availableFoods[Math.floor(Math.random() * availableFoods.length)];
-                    displayDatePlan(finalActivity, finalFood, false);
-                }
-            }, 200);
-        }
-
-        function displayDatePlan(activity, food, spinning) {
-            const priceLabels = { free: '💚 Free', budget: '💙 Budget', moderate: '💛 Moderate', splurge: '❤️ Splurge' };
-            const priceClass = { free: 'price-free', budget: 'price-budget', moderate: 'price-moderate', splurge: 'price-splurge' };
-            document.getElementById('dateResults').innerHTML = `
-                <div class="card date-plan-card" style="grid-column: 1 / -1;">
-                    <h3>💑 Your Date Night Plan</h3>
-                    <div class="date-plan-section">
-                        <h4>🎯 Activity: ${activity.name} <span class="price-badge ${priceClass[activity.price]}">${priceLabels[activity.price]}</span></h4>
-                        <div class="card-meta">${activity.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-                        <p>${activity.desc}</p>
-                        <div class="card-links">
-                            ${activity.grouponActivity ? `<a href="${activity.grouponActivity}" target="_blank" class="card-link groupon-link">🎫 Find Deals on Groupon</a>` : ''}
-                            <a href="https://www.groupon.com/local/things-to-do" target="_blank" class="card-link stream-link">🔍 Browse All Activities</a>
-                        </div>
-                    </div>
-                    <div class="date-plan-section">
-                        <h4>🍽️ Dinner: ${food.name} <span class="price-badge ${priceClass[food.price]}">${priceLabels[food.price]}</span></h4>
-                        <div class="card-meta">${food.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-                        <p>${food.desc}</p>
-                        <div class="card-links">
-                            ${food.grouponFood ? `<a href="${food.grouponFood}" target="_blank" class="card-link groupon-link">🍴 Find Food Deals</a>` : ''}
-                            <a href="https://www.groupon.com/local/food-and-drink" target="_blank" class="card-link order-link">🔍 Browse All Food Deals</a>
-                        </div>
-                    </div>
-                    ${!spinning ? `<div style="text-align: center; margin-top: 20px;"><button class="card-link pick-btn" onclick="pickDate(${activity.id}, '${activity.name}', '${food.name}')" style="padding: 15px 40px; font-size: 1.1rem;">💕 This is Our Date!</button></div>` : ''}
+        document.getElementById('quickIdeas').innerHTML = ideas.map(i => `
+            <div class="venue-card" style="display:flex;align-items:center;gap:14px;padding:14px 16px;margin-bottom:8px;">
+                <div style="font-size:24px;flex-shrink:0;">${i.emoji}</div>
+                <div>
+                    <div style="font-size:15px;font-weight:600;">${i.label}</div>
+                    <div style="font-size:13px;color:var(--text-secondary);">${i.desc}</div>
                 </div>
-            `;
+            </div>
+        `).join('');
+    }
+
+    // ========================================================================
+    // MOVIES TAB
+    // ========================================================================
+
+    const MOVIE_GENRES = ['All', 'Comedy', 'Thriller', 'Romance', 'Action', 'Horror', 'Documentary', 'Drama'];
+    let movieFilter = 'All';
+    let movieSearchQuery = '';
+
+    function renderMovieFilters() {
+        document.getElementById('movieFilters').innerHTML = MOVIE_GENRES.map(g =>
+            `<button class="filter-pill ${g === movieFilter ? 'active' : ''}" onclick="setMovieFilter('${g}')">${g}</button>`
+        ).join('');
+    }
+
+    function setMovieFilter(genre) {
+        movieFilter = genre;
+        renderMovieFilters();
+        renderMovies();
+    }
+
+    function renderMovies() {
+        let filtered = MOVIES.filter(m => !state.watchedMovies.includes(m.title));
+        if (movieFilter !== 'All') {
+            filtered = filtered.filter(m => m.genres.includes(movieFilter));
         }
-
-        function pickDate(activityId, activityName, foodName) {
-            if (!doneDates.includes(activityId)) {
-                doneDates.push(activityId); localStorage.setItem('doneDates', JSON.stringify(doneDates));
-                updateDateList(); updateDateStats();
-            }
-            document.getElementById('dateResults').innerHTML = `
-                <div class="card date-plan-card" style="grid-column: 1 / -1; border: 2px solid #4CAF50;">
-                    <h3>🎉 Date Night is Set!</h3>
-                    <p style="font-size: 1.2rem; margin: 20px 0;"><strong>Activity:</strong> ${activityName}</p>
-                    <p style="font-size: 1.2rem; margin: 20px 0;"><strong>Dinner:</strong> ${foodName}</p>
-                    <p style="color: #81c784; margin-top: 20px;">Have an amazing time together! 💕</p>
-                </div>
-            `;
-        }
-
-        function updateDateList() {
-            const list = dateActivities.filter(d => doneDates.includes(d.id));
-            document.getElementById('dateList').innerHTML = list.length ? list.map(d => `<span class="history-item">${d.name}<button class="remove-history" onclick="doneDates=doneDates.filter(i=>i!=${d.id});localStorage.setItem('doneDates',JSON.stringify(doneDates));updateDateList();updateDateStats();">×</button></span>`).join('') : '<p style="color: #a0a0a0;">No recent dates tracked.</p>';
-        }
-
-        function updateDateStats() {
-            document.getElementById('dateCount').textContent = getFilteredDates().length;
-            document.getElementById('doneCount').textContent = doneDates.length;
-        }
-
-        // ==================== MOVIE SEARCH ====================
-        const TMDB_API_KEY = '2dca580c2a14b55200e784d157207b4d'; // Free public key for demo
-        let searchTimeout;
-
-        document.getElementById('movieSearchInput').addEventListener('input', (e) => {
-            clearTimeout(searchTimeout);
-            const query = e.target.value.trim();
-
-            if (query.length < 2) {
-                document.getElementById('movieSearchResults').style.display = 'none';
-                document.getElementById('tmdbNote').style.display = 'none';
-                return;
-            }
-
-            searchTimeout = setTimeout(() => searchMovies(query), 300);
-        });
-
-        async function searchMovies(query) {
-            const resultsDiv = document.getElementById('movieSearchResults');
-            const tmdbNote = document.getElementById('tmdbNote');
-
-            // First search your local list
-            const localResults = movies.filter(m =>
-                m.title.toLowerCase().includes(query.toLowerCase())
+        if (movieSearchQuery) {
+            const q = movieSearchQuery.toLowerCase();
+            filtered = filtered.filter(m =>
+                m.title.toLowerCase().includes(q) ||
+                m.desc.toLowerCase().includes(q) ||
+                m.genres.some(g => g.toLowerCase().includes(q))
             );
+        }
 
-            // Then search TMDB for external results
-            let tmdbResults = [];
-            try {
-                const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&page=1`);
-                const data = await response.json();
-                tmdbResults = data.results ? data.results.slice(0, 8) : [];
-            } catch (err) {
-                console.log('TMDB search failed, showing local only');
-            }
+        if (filtered.length === 0) {
+            document.getElementById('movieList').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">&#x1F3AC;</div>
+                    <div class="empty-state-text">No movies match your search.<br>Try a different filter.</div>
+                </div>`;
+            return;
+        }
 
-            // Build results HTML
-            let html = '';
+        document.getElementById('movieList').innerHTML = filtered.map(m => {
+            const watched = state.watchedMovies.includes(m.title);
+            return `
+            <div class="movie-card">
+                <div class="movie-card-header">
+                    <div>
+                        <div class="movie-title">${m.title}</div>
+                        <div class="movie-year">${m.year}</div>
+                    </div>
+                    <div class="movie-rating">${ratingStars(m.rating)}</div>
+                </div>
+                <div class="movie-tags">${m.genres.map(g => `<span class="movie-tag">${g}</span>`).join('')}</div>
+                <div class="movie-desc">${m.desc}</div>
+                <div class="movie-actions">
+                    <a href="https://www.netflix.com/search?q=${m.netflix}" target="_blank" class="btn-netflix">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5.398 0v.006c3.028 8.556 5.37 15.175 8.348 23.596.21.062.438.062.586.017.15-.045 4.464-12.6 8.27-23.62h-4.025c-1.397 4.08-2.87 8.16-4.28 12.28C12.87 8.16 11.43 4.08 9.97 0H5.398zM0 0v24h4.14V10.08L8.27 24h.002L4.14 10.08V0H0z"/></svg>
+                        Netflix
+                    </a>
+                    <button class="btn-watched ${watched ? 'done' : ''}" onclick="toggleWatched('${m.title.replace(/'/g, "\\'")}')">
+                        ${watched ? 'Watched' : 'Mark Watched'}
+                    </button>
+                </div>
+            </div>`;
+        }).join('');
+    }
 
-            // Local results first
-            if (localResults.length > 0) {
-                html += '<div style="padding: 10px 20px; background: rgba(233, 69, 96, 0.1); color: #e94560; font-weight: bold;">📋 On Your List</div>';
-                localResults.forEach(m => {
-                    const isWatched = watchedMovies.includes(m.id);
-                    html += `
-                        <div class="search-result-item">
-                            <div class="search-result-info">
-                                <h4>${m.title} ${m.year ? `(${m.year})` : ''}</h4>
-                                <p>${m.genres ? m.genres.join(', ') : ''}</p>
-                            </div>
-                            <div class="search-result-actions">
-                                ${isWatched ? '<span class="watched-badge">✓ Watched</span>' : '<span class="on-list-badge">✓ On List</span>'}
-                                <a href="https://www.cineby.gd/search?keyword=${encodeURIComponent(m.title)}" target="_blank" class="quick-add-btn" style="background: #e50914;">🎬 Watch</a>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
+    function toggleWatched(title) {
+        const idx = state.watchedMovies.indexOf(title);
+        if (idx > -1) {
+            state.watchedMovies.splice(idx, 1);
+        } else {
+            state.watchedMovies.push(title);
+            showToast(`"${title}" marked as watched`);
+        }
+        saveState();
+        renderMovies();
+    }
 
-            // TMDB results (filter out ones already on list)
-            const localTitles = movies.map(m => m.title.toLowerCase());
-            const newTmdbResults = tmdbResults.filter(m => !localTitles.includes(m.title.toLowerCase()));
+    document.getElementById('movieSearch').addEventListener('input', (e) => {
+        movieSearchQuery = e.target.value;
+        renderMovies();
+    });
 
-            if (newTmdbResults.length > 0) {
-                html += '<div style="padding: 10px 20px; background: rgba(76, 175, 80, 0.1); color: #81c784; font-weight: bold;">🌐 Discover New Movies</div>';
-                newTmdbResults.forEach(m => {
-                    const year = m.release_date ? m.release_date.split('-')[0] : '';
-                    html += `
-                        <div class="search-result-item">
-                            <div class="search-result-info">
-                                <h4>${m.title} ${year ? `(${year})` : ''}</h4>
-                                <p>${m.overview ? m.overview.substring(0, 100) + '...' : 'No description available.'}</p>
-                            </div>
-                            <div class="search-result-actions">
-                                <button class="quick-add-btn" onclick="quickAddMovie('${m.title.replace(/'/g, "\\'")}', '${year}', '${(m.overview || '').replace(/'/g, "\\'").substring(0, 200)}', ${m.id})">+ Add to List</button>
-                                <a href="https://www.cineby.gd/search?keyword=${encodeURIComponent(m.title)}" target="_blank" class="quick-add-btn" style="background: #e50914;">🎬 Watch</a>
-                            </div>
-                        </div>
-                    `;
-                });
-                tmdbNote.style.display = 'block';
+    // ========================================================================
+    // ACTIVITIES TAB
+    // ========================================================================
+
+    const ACTIVITY_TAGS = ['All', 'Outdoor', 'Indoor', 'Romantic', 'Active', 'Fun', 'Creative', 'Cultural', 'Free'];
+    let activityFilter = 'All';
+    let activitySearchQuery = '';
+    let randomActivityIdx = -1;
+
+    function renderActivityFilters() {
+        document.getElementById('activityFilters').innerHTML = ACTIVITY_TAGS.map(t =>
+            `<button class="filter-pill ${t === activityFilter ? 'active' : ''}" onclick="setActivityFilter('${t}')">${t}</button>`
+        ).join('');
+    }
+
+    function setActivityFilter(tag) {
+        activityFilter = tag;
+        randomActivityIdx = -1;
+        renderActivityFilters();
+        renderActivities();
+    }
+
+    function renderActivities() {
+        let filtered = [...ACTIVITIES];
+        if (activityFilter !== 'All') {
+            if (activityFilter === 'Free') {
+                filtered = filtered.filter(a => a.price === 'free');
             } else {
-                tmdbNote.style.display = 'none';
+                filtered = filtered.filter(a => a.tags.includes(activityFilter));
             }
-
-            if (html === '') {
-                html = '<div style="padding: 20px; text-align: center; color: #888;">No movies found. Try a different search term.</div>';
-            }
-
-            resultsDiv.innerHTML = html;
-            resultsDiv.style.display = 'block';
+        }
+        if (activitySearchQuery) {
+            const q = activitySearchQuery.toLowerCase();
+            filtered = filtered.filter(a =>
+                a.name.toLowerCase().includes(q) ||
+                a.desc.toLowerCase().includes(q) ||
+                a.tags.some(t => t.toLowerCase().includes(q))
+            );
         }
 
-        function quickAddMovie(title, year, synopsis, tmdbId) {
-            const newMovie = {
-                id: Date.now(),
-                title: title,
-                year: year ? parseInt(year) : null,
-                genres: ['Added'],
-                synopsis: synopsis || 'A movie to watch.',
-                trailer: `https://www.youtube.com/results?search_query=${encodeURIComponent(title + ' ' + year + ' trailer')}`,
-                cineby: `https://www.cineby.gd/search?keyword=${encodeURIComponent(title)}`
-            };
-
-            movies.push(newMovie);
-            const userMovies = JSON.parse(localStorage.getItem('userMovies') || '[]');
-            userMovies.push(newMovie);
-            localStorage.setItem('userMovies', JSON.stringify(userMovies));
-
-            updateMovieStats();
-
-            // Refresh search to show updated status
-            const query = document.getElementById('movieSearchInput').value.trim();
-            if (query) searchMovies(query);
-
-            // Show confirmation
-            const btn = event.target;
-            btn.textContent = '✓ Added!';
-            btn.style.background = '#81c784';
-            setTimeout(() => {
-                btn.textContent = '+ Add to List';
-                btn.style.background = '';
-            }, 2000);
+        if (filtered.length === 0) {
+            document.getElementById('activityList').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">&#x1F3AF;</div>
+                    <div class="empty-state-text">No activities match your search.</div>
+                </div>`;
+            return;
         }
 
-        // Close search results when clicking outside
-        document.addEventListener('click', (e) => {
-            const searchSection = document.querySelector('.search-section');
-            if (searchSection && !searchSection.contains(e.target)) {
-                document.getElementById('movieSearchResults').style.display = 'none';
-                document.getElementById('tmdbNote').style.display = 'none';
+        document.getElementById('activityList').innerHTML = filtered.map((a, i) => {
+            const isRandom = (randomActivityIdx === ACTIVITIES.indexOf(a));
+            return `
+            <div class="venue-card ${isRandom ? 'random-pick' : ''}">
+                <div class="venue-name">${a.name}</div>
+                <div class="venue-meta">
+                    ${priceLabel(a.price)}
+                    ${a.address ? `<span class="venue-address">${a.address}</span>` : ''}
+                </div>
+                <div class="venue-tags">${a.tags.map(t => `<span class="venue-tag">${t}</span>`).join('')}</div>
+                <div class="venue-desc">${a.desc}</div>
+                <div class="venue-actions">
+                    ${a.url ? `<a href="${a.url}" target="_blank" class="btn-link primary">Visit Site</a>` : ''}
+                    ${a.groupon ? `<a href="${a.groupon}" target="_blank" class="btn-link green">Groupon Deal</a>` : ''}
+                    ${!a.url && !a.groupon ? `<span style="font-size:12px;color:var(--text-tertiary);">Search online for local options</span>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    document.getElementById('activitySearch').addEventListener('input', (e) => {
+        activitySearchQuery = e.target.value;
+        renderActivities();
+    });
+
+    document.getElementById('randomActivityBtn').addEventListener('click', () => {
+        const btn = document.getElementById('randomActivityBtn');
+        btn.classList.add('spinning');
+        setTimeout(() => btn.classList.remove('spinning'), 600);
+        randomActivityIdx = Math.floor(Math.random() * ACTIVITIES.length);
+        activityFilter = 'All';
+        activitySearchQuery = '';
+        document.getElementById('activitySearch').value = '';
+        renderActivityFilters();
+        renderActivities();
+        const el = document.querySelector('.random-pick');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showToast(`How about: ${ACTIVITIES[randomActivityIdx].name}?`);
+    });
+
+    // ========================================================================
+    // DINNER TAB
+    // ========================================================================
+
+    const DINNER_TAGS = ['All', 'Quick', 'Comfort', 'Healthy', 'Mexican', 'Asian', 'Italian', 'American', 'Soul Food'];
+    let dinnerFilter = 'All';
+    let dinnerSearchQuery = '';
+    let randomDinnerIdx = -1;
+
+    function renderDinnerFilters() {
+        document.getElementById('dinnerFilters').innerHTML = DINNER_TAGS.map(t =>
+            `<button class="filter-pill ${t === dinnerFilter ? 'active' : ''}" onclick="setDinnerFilter('${t}')">${t}</button>`
+        ).join('');
+    }
+
+    function setDinnerFilter(tag) {
+        dinnerFilter = tag;
+        randomDinnerIdx = -1;
+        renderDinnerFilters();
+        renderDinners();
+    }
+
+    function renderDinners() {
+        let filtered = [...DINNERS];
+        if (dinnerFilter !== 'All') {
+            filtered = filtered.filter(d => d.tags.some(t => t.toLowerCase().includes(dinnerFilter.toLowerCase())));
+        }
+        if (dinnerSearchQuery) {
+            const q = dinnerSearchQuery.toLowerCase();
+            filtered = filtered.filter(d =>
+                d.name.toLowerCase().includes(q) ||
+                d.desc.toLowerCase().includes(q) ||
+                d.tags.some(t => t.toLowerCase().includes(q))
+            );
+        }
+
+        if (filtered.length === 0) {
+            document.getElementById('dinnerList').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">&#x1F35D;</div>
+                    <div class="empty-state-text">No dinner ideas match your search.</div>
+                </div>`;
+            return;
+        }
+
+        document.getElementById('dinnerList').innerHTML = filtered.map(d => {
+            const isRandom = (randomDinnerIdx === DINNERS.indexOf(d));
+            const typeIcon = d.type === 'cook' ? '&#x1F468;&#x200D;&#x1F373;' : d.type === 'order' ? '&#x1F4F1;' : '&#x1F37D;&#xFE0F;';
+            const typeLabel = d.type === 'cook' ? 'Cook' : d.type === 'order' ? 'Order' : 'Either';
+            return `
+            <div class="venue-card ${isRandom ? 'random-pick' : ''}">
+                <div class="venue-name">${d.name}</div>
+                <div class="venue-meta">
+                    <span class="venue-price price-budget">${typeIcon} ${typeLabel}</span>
+                    ${effortLabel(d.effort)}
+                </div>
+                <div class="venue-tags">${d.tags.map(t => `<span class="venue-tag">${t}</span>`).join('')}</div>
+                <div class="venue-desc">${d.desc}</div>
+                <div class="venue-actions">
+                    ${d.recipe ? `<a href="${d.recipe}" target="_blank" class="btn-link recipe">View Recipe</a>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function renderRestaurants() {
+        document.getElementById('restaurantList').innerHTML = ATL_RESTAURANTS.map(r => `
+            <div class="venue-card">
+                <div class="venue-name">${r.name}</div>
+                <div class="venue-meta">
+                    <span class="venue-price ${r.price === '$' ? 'price-budget' : r.price === '$$' ? 'price-moderate' : 'price-splurge'}">${r.price}</span>
+                    <span class="venue-tag" style="background: rgba(124,58,237,0.12); color: var(--purple-light);">${r.cuisine}</span>
+                </div>
+                <div class="venue-desc" style="margin-bottom:10px;">${r.address}</div>
+                <div class="venue-actions">
+                    <a href="${r.url}" target="_blank" class="btn-link primary">Visit Website</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    document.getElementById('dinnerSearch').addEventListener('input', (e) => {
+        dinnerSearchQuery = e.target.value;
+        renderDinners();
+    });
+
+    document.getElementById('randomDinnerBtn').addEventListener('click', () => {
+        const btn = document.getElementById('randomDinnerBtn');
+        btn.classList.add('spinning');
+        setTimeout(() => btn.classList.remove('spinning'), 600);
+        randomDinnerIdx = Math.floor(Math.random() * DINNERS.length);
+        dinnerFilter = 'All';
+        dinnerSearchQuery = '';
+        document.getElementById('dinnerSearch').value = '';
+        renderDinnerFilters();
+        renderDinners();
+        const el = document.querySelector('.random-pick');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showToast(`Tonight: ${DINNERS[randomDinnerIdx].name}!`);
+    });
+
+    // ========================================================================
+    // TRACKER TAB
+    // ========================================================================
+
+    function calculateStreak() {
+        if (state.dateLog.length === 0) return 0;
+        const dates = state.dateLog.map(d => new Date(d.date)).sort((a, b) => b - a);
+        let streak = 0;
+        const now = new Date();
+        // Check from this week backward
+        for (let i = 0; i < 52; i++) {
+            const checkDate = new Date(now);
+            checkDate.setDate(now.getDate() - (i * 7));
+            // Find the Friday of that week
+            const dayOfWeek = checkDate.getDay();
+            const fridayOffset = (dayOfWeek >= 5) ? dayOfWeek - 5 : dayOfWeek + 2;
+            const friday = new Date(checkDate);
+            friday.setDate(checkDate.getDate() - fridayOffset);
+            const fridayStr = friday.toISOString().split('T')[0];
+
+            const hasDate = dates.some(d => {
+                const ds = d.toISOString().split('T')[0];
+                // Within 2 days of that Friday (Thur-Sun counts)
+                const diff = Math.abs(new Date(ds) - new Date(fridayStr)) / (1000 * 60 * 60 * 24);
+                return diff <= 2;
+            });
+
+            if (hasDate) {
+                streak++;
+            } else if (i > 0) {
+                break; // streak broken
             }
+        }
+        return streak;
+    }
+
+    function renderTracker() {
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        const monthEntries = state.dateLog.filter(d => {
+            const date = new Date(d.date);
+            return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
         });
+        const monthSpent = monthEntries.reduce((sum, d) => sum + (d.cost || 0), 0);
+        const remaining = BUDGET - monthSpent;
+        const pct = Math.min((monthSpent / BUDGET) * 100, 100);
+        const streak = calculateStreak();
 
-        // ==================== EVENT LISTENERS ====================
-        document.querySelectorAll('#movieTab .filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#movieTab .filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active'); currentMovieFilter = btn.dataset.filter;
-                updateMovieStats(); document.getElementById('movieResults').innerHTML = '';
-            });
+        document.getElementById('totalDates').textContent = state.dateLog.length;
+        document.getElementById('streakCount').textContent = streak;
+        document.getElementById('monthDates').textContent = monthEntries.length;
+
+        if (state.dateLog.length > 0) {
+            const last = new Date(state.dateLog[0].date);
+            document.getElementById('lastDateDisplay').textContent = formatDate(last);
+        }
+
+        const budgetEl = document.getElementById('budgetRemaining');
+        budgetEl.textContent = remaining >= 0 ? `$${remaining} left` : `-$${Math.abs(remaining)}`;
+        budgetEl.className = remaining >= 0 ? 'budget-amount' : 'budget-amount over';
+
+        const fill = document.getElementById('budgetFill');
+        fill.style.width = pct + '%';
+        fill.className = pct > 100 ? 'budget-fill over' : 'budget-fill';
+
+        document.getElementById('budgetNote').textContent = `$${monthSpent} of $${BUDGET} spent this month`;
+
+        // Set default date to next Friday
+        const logDateEl = document.getElementById('logDate');
+        if (!logDateEl.value) {
+            logDateEl.value = getNextFriday().toISOString().split('T')[0];
+        }
+
+        // Render history
+        document.getElementById('historyList').innerHTML = state.dateLog.length === 0
+            ? `<div class="empty-state"><div class="empty-state-icon">&#x1F4C5;</div><div class="empty-state-text">No dates logged yet.<br>Time to plan your first one!</div></div>`
+            : state.dateLog.map(d => `
+                <div class="history-card">
+                    <div class="history-info">
+                        <h4>${d.activity}</h4>
+                        <p>${formatDate(d.date)}${d.location ? ' &middot; ' + d.location : ''}</p>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        ${d.cost ? `<div class="history-cost">$${d.cost}</div>` : ''}
+                        <button class="history-delete" onclick="deleteDate(${d.id})">&#x2715;</button>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    document.getElementById('logBtn').addEventListener('click', () => {
+        const activity = document.getElementById('logActivity').value.trim();
+        const location = document.getElementById('logLocation').value.trim();
+        const cost = parseFloat(document.getElementById('logCost').value) || 0;
+        const date = document.getElementById('logDate').value;
+
+        if (!activity) { showToast('What did you do? Fill in the activity.'); return; }
+        if (!date) { showToast('Pick a date.'); return; }
+
+        state.dateLog.unshift({ id: Date.now(), activity, location, cost, date });
+        saveState();
+
+        document.getElementById('logActivity').value = '';
+        document.getElementById('logLocation').value = '';
+        document.getElementById('logCost').value = '';
+
+        renderTracker();
+        renderHero();
+        showToast('Date logged! Another one in the books.');
+    });
+
+    document.getElementById('clearHistory').addEventListener('click', () => {
+        if (confirm('Clear all date history? This cannot be undone.')) {
+            state.dateLog = [];
+            saveState();
+            renderTracker();
+            renderHero();
+            showToast('History cleared.');
+        }
+    });
+
+    function deleteDate(id) {
+        state.dateLog = state.dateLog.filter(d => d.id !== id);
+        saveState();
+        renderTracker();
+        renderHero();
+    }
+
+    // ========================================================================
+    // TAB NAVIGATION
+    // ========================================================================
+
+    document.querySelectorAll('.tab-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tab = btn.dataset.tab;
+            document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('tab-' + tab).classList.add('active');
         });
+    });
 
-        document.querySelectorAll('#dinnerTab .dinner-filter .filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#dinnerTab .dinner-filter .filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active'); currentDinnerFilter = btn.dataset.filter;
-                updateDinnerStats(); document.getElementById('dinnerResults').innerHTML = '';
-            });
-        });
+    // ========================================================================
+    // INIT
+    // ========================================================================
 
-        document.querySelectorAll('.cook-vs-order button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.cook-vs-order button').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active'); dinnerMode = btn.dataset.mode;
-                updateDinnerStats(); document.getElementById('dinnerResults').innerHTML = '';
-            });
-        });
+    renderHero();
+    renderMovieFilters();
+    renderMovies();
+    renderActivityFilters();
+    renderActivities();
+    renderDinnerFilters();
+    renderDinners();
+    renderRestaurants();
+    renderTracker();
 
-        document.querySelectorAll('#datenightTab .datenight-filter .filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#datenightTab .datenight-filter .filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active'); currentDateFilter = btn.dataset.filter;
-                updateDateStats(); document.getElementById('dateResults').innerHTML = '';
-            });
-        });
-
-        document.getElementById('spinMovieBtn').addEventListener('click', spinForMovies);
-        document.getElementById('spinDinnerBtn').addEventListener('click', spinForDinners);
-        document.getElementById('spinDateBtn').addEventListener('click', spinForDates);
-
-        document.getElementById('addMovieForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const newMovie = { id: Date.now(), title: document.getElementById('movieTitle').value, year: parseInt(document.getElementById('movieYear').value) || null, genres: document.getElementById('movieGenres').value.split(',').map(g => g.trim()), synopsis: document.getElementById('movieSynopsis').value, trailer: document.getElementById('movieTrailer').value || null, cineby: `https://www.cineby.gd/search?keyword=${encodeURIComponent(document.getElementById('movieTitle').value)}` };
-            movies.push(newMovie);
-            const userMovies = JSON.parse(localStorage.getItem('userMovies') || '[]'); userMovies.push(newMovie); localStorage.setItem('userMovies', JSON.stringify(userMovies));
-            document.getElementById('addMovieForm').reset(); updateMovieStats(); alert(`"${newMovie.title}" added!`);
-        });
-
-        document.getElementById('addDinnerForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const newDinner = { id: Date.now(), name: document.getElementById('dinnerName').value, type: document.getElementById('dinnerType').value, tags: document.getElementById('dinnerTags').value.split(',').map(t => t.trim()), effort: document.getElementById('dinnerEffort').value, desc: document.getElementById('dinnerDesc').value || 'A delicious meal option.', recipe: document.getElementById('dinnerRecipe').value || null };
-            dinners.push(newDinner);
-            const userDinners = JSON.parse(localStorage.getItem('userDinners') || '[]'); userDinners.push(newDinner); localStorage.setItem('userDinners', JSON.stringify(userDinners));
-            document.getElementById('addDinnerForm').reset(); updateDinnerStats(); alert(`"${newDinner.name}" added!`);
-        });
-
-        document.getElementById('addDateForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const newDate = { id: Date.now(), name: document.getElementById('dateName').value, tags: document.getElementById('dateTags').value.split(',').map(t => t.trim()), price: document.getElementById('datePrice').value, desc: document.getElementById('dateDesc').value || 'A fun date idea!', grouponActivity: 'https://www.groupon.com/local/things-to-do' };
-            dateActivities.push(newDate);
-            const userDates = JSON.parse(localStorage.getItem('userDates') || '[]'); userDates.push(newDate); localStorage.setItem('userDates', JSON.stringify(userDates));
-            document.getElementById('addDateForm').reset(); updateDateStats(); alert(`"${newDate.name}" added!`);
-        });
-
-        document.getElementById('clearMovieHistory').addEventListener('click', () => { if (confirm('Clear all movie watch history?')) { watchedMovies = []; localStorage.setItem('watchedMovies', JSON.stringify(watchedMovies)); updateWatchedList(); updateMovieStats(); } });
-        document.getElementById('clearDinnerHistory').addEventListener('click', () => { if (confirm('Clear all dinner history?')) { eatenDinners = []; localStorage.setItem('eatenDinners', JSON.stringify(eatenDinners)); updateEatenList(); updateDinnerStats(); } });
-        document.getElementById('clearDateHistory').addEventListener('click', () => { if (confirm('Clear all date history?')) { doneDates = []; localStorage.setItem('doneDates', JSON.stringify(doneDates)); updateDateList(); updateDateStats(); } });
-
-        document.getElementById('toggleMovieHistory').addEventListener('click', function() { document.getElementById('watchedList').classList.toggle('hidden'); this.textContent = document.getElementById('watchedList').classList.contains('hidden') ? 'Show' : 'Hide'; });
-        document.getElementById('toggleDinnerHistory').addEventListener('click', function() { document.getElementById('eatenList').classList.toggle('hidden'); this.textContent = document.getElementById('eatenList').classList.contains('hidden') ? 'Show' : 'Hide'; });
-        document.getElementById('toggleDateHistory').addEventListener('click', function() { document.getElementById('dateList').classList.toggle('hidden'); this.textContent = document.getElementById('dateList').classList.contains('hidden') ? 'Show' : 'Hide'; });
-
-        // ==================== INITIALIZE ====================
-        updateWatchedList(); updateMovieStats();
-        updateEatenList(); updateDinnerStats();
-        updateDateList(); updateDateStats();
     </script>
 </body>
 </html>
